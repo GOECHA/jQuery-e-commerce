@@ -9,18 +9,6 @@
 //   $('head').append('<link rel="shortcut icon" href="' + faviconUrl + '">');
 // });
 
-// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ Data ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-$.ajax({
-  url: 'https://fakestoreapi.com/products',
-  method: 'GET',
-  success: function(data) {
-    console.log('data', data)
-  },
-  error: function(error) {
-    alert(error);
-  }
-});
 
 
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~ Navigation ~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -60,3 +48,26 @@ $(document).ready(function() {
   $('#home').show();
 
 });
+
+// ~~~~~~~~~~~~~~~~~~~~~~~~~~~ Display Data ~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+function displayProducts(data) {
+
+  var productContainer = $('#productContainer');
+
+  // Iterate over each product in the data
+  data.forEach(function(product) {
+    console.log('product', product)
+    var productHtml = '<div class="product">' +
+      '<img src="' + product.image + '" alt="' + product.name + '">' +
+      '<h3>' + product.title + '</h3>' +
+      '<p>' + product.description + '</p>' +
+      '</div>';
+
+    // Append the product HTML to the product container
+    productContainer.append(productHtml);
+  });
+}
+
+
+
