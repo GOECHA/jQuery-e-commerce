@@ -1,5 +1,15 @@
 //$(selector).action() jQuery function formatting
 
+
+$(function() {
+  // Get the favicon URL
+  var faviconUrl = '/favicon.ico';
+
+  // Add the favicon to the document head
+  $('head').append('<link rel="shortcut icon" href="' + faviconUrl + '">');
+});
+
+
 $(document).ready(function(){
     
     $(".btn").click(function(e){
@@ -23,3 +33,4 @@ $.ajax({
     alert(error);
   }
 });
+
