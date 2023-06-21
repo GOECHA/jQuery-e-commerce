@@ -56,11 +56,25 @@ function displayProducts(data) {
 
   data.forEach(function(product) {
     console.log('product', product);
-    var productHtml = '<div class="col productItem">' +
-      '<img class="img-fluid" src="' + product.image + '" alt="' + product.name + '">' +
-      '<h5>' + product.title + '</h5>' +
-      '<p>' + product.description + '</p>' +
-      '</div>'
+    var productHtml = 
+    // `<div class="col productItem">
+    `<div class="col card" style="width: 13rem; height:18rem; align-items: center">
+    <img src=${product.image} class="card-img-top object-fit-contain border rounded" alt=${product.title} style="width: 80%; height: 35%;>
+    <div class="card-body" style="width: 90%; height: 30%;">
+      <div class="card-title-wrapper">
+      <p class="card-title">${product.title}</p>
+      </div>
+      <p class="card-text">${product.description}</p>
+      <p class="card-text price"> $${product.price}</p>
+      <p class="card-text price">  ${product.rating.rate}⭑</p>
+      <p class="card-text price">  ${product.category}</p>
+      <div class="card-footer">
+      <a href="#cart" class="btn btn-cart">Add to Cart</a>
+      </div>
+     
+    </div>
+    </div>`
+  // </div>`
     productContainer.append(productHtml);
   });
 }
