@@ -52,20 +52,15 @@ $(document).ready(function() {
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~ Display Data ~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 function displayProducts(data) {
-  var productContainer = $('#mainProductWrapper');
+  var productContainer = $('#rowProduct');
 
   data.forEach(function(product) {
     console.log('product', product);
-    var productHtml = '<div class="product">' +
-      '<div class="row">' +
-      '<div class="col-lg-4 col-md-6 col-sm-12">' +
+    var productHtml = '<div class="col productItem">' +
       '<img class="img-fluid" src="' + product.image + '" alt="' + product.name + '">' +
-      '<h3>' + product.title + '</h3>' +
+      '<h5>' + product.title + '</h5>' +
       '<p>' + product.description + '</p>' +
-      '</div>' +
-      '</div>' +
-      '</div>';
-
+      '</div>'
     productContainer.append(productHtml);
   });
 }
