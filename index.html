@@ -9,23 +9,42 @@
   <link rel="stylesheet" href="scss/styles.css">
 
 
-<!-- <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
-<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
-<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
-<link rel="manifest" href="/site.webmanifest"> -->
 </head>
 <body>
-  <nav class="navbar navbar-expand-lg navbar-light bg-light">
+  
+  <style>
+    .btn-grad {
+      background-image: linear-gradient(to right, #4CB8C4 0%, #3CD3AD 51%, #4CB8C4 100%);
+      background-position: left center;
+      background-size: 200% auto;
+      color: #fff;
+      text-align: center;
+      text-transform: uppercase;
+      transition: .5s;
+      margin: 10px;
+      padding: 15px 45px;
+      box-shadow: 0 0 20px #eee;
+      border-radius: 10px;
+      display: block;
+      text-decoration: none;
+    }
+  
+    .btn-grad:hover {
+      background-position: right center;
+    }
+  </style>
+
+  <nav class="navbar navbar-expand-lg navbar-light bg-light text-white">
     <a class="navbar-brand" href="#home">
 
     <img class="nav-logo img-fluid" src="assets/snackcrate-logo2.png" alt="logo" width="50" height="24"/>
     TealRay Boutique
     </a>
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+    <button class="navbar-toggler " type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
-    <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
-      <ul class="navbar-nav">
+    <div class="collapse navbar-collapse justify-content-end text-white" id="navbarNav">
+      <ul class="navbar-nav text-white">
         <li class="nav-item">
           <a class="nav-link" href="#products">Products</a>
         </li>
@@ -40,12 +59,19 @@
   </nav>
 
   <section class="page hero" id="home">
-    <div class="container">
-      <h1>TealRay Boutique</h1>
-      <h2> Unlock the Best of Fashion and Innovation</h2>
-      <a href="#products" class="btn btn-primary">Explore</a>
+    <div class="position-relative top-0 start-0 end-0 bottom-0">
+      <img src="./assets/alice-alinari-CTlRkofxgRY-unsplash.jpg" alt="TealRay Boutique Image" class="img-fluid">
+      <div class="text-overlay position-absolute top-50 start-50 translate-middle text-center text-white">
+        <h1 class="display-4">TealRay Boutique</h1>
+        <h2 class="h4">Unlock the Best of Fashion and Innovation</h2>
+        <a href="#products" class="btn btn-grad"> Explore </a> 
+      </div>
     </div>
   </section>
+
+ 
+  
+ 
 
   <section class="page products" id="products">
     <h3>Product Line</h3>
