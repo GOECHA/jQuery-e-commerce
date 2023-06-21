@@ -13331,6 +13331,7 @@ body,
 
 .card-img-top {
   margin-top: 0.5rem;
+  mix-blend-mode: multiply;
 }
 
 .btn-cart {
@@ -13338,35 +13339,65 @@ body,
   padding: 0;
 }
 
+.btn-grad {
+  background-image: linear-gradient(to right, #4CB8C4 0%, #3CD3AD 51%, #4CB8C4 100%);
+  background-position: left center;
+  background-size: 200% auto;
+  color: #fff;
+  text-align: center;
+  text-transform: uppercase;
+  transition: 0.5s;
+  margin: 10px;
+  padding: 15px 45px;
+  box-shadow: 0 0 20px #eee;
+  border-radius: 10px;
+  display: block;
+  text-decoration: none;
+}
+
+.btn-grad:hover {
+  background-position: right center;
+}
+
+.card {
+  background-color: rgba(255, 255, 255, 0.5);
+}
+
 p {
   margin: 1px;
 }
 
 .card-title-wrapper {
-  height: 20px;
-  -webkit-mask-image: linear-gradient(180deg, #000 60%, transparent);
+  height: 40px;
+  -webkit-mask-image: linear-gradient(180deg, #000 80%, transparent);
+  margin-top: 0.1rem;
 }
 
 .card-title {
   font-size: 0.7rem;
-  margin-bottom: 0.1rem;
-  font-style: bold;
+  padding-top: 0.1rem;
+  padding-bottom: 0.1rem;
+  font-weight: 900;
+}
+
+.card-description-wrapper {
+  max-width: 90%;
+  height: 70px;
+  -webkit-mask-image: linear-gradient(180deg, #000 60%, transparent);
 }
 
 .card-text {
-  max-width: 90%;
-  -webkit-mask-image: linear-gradient(180deg, #000 60%, transparent);
   font-size: 0.5rem;
 }
 
 .p-description {
-  height: 70px;
   width: 90%;
 }
 
 .price {
   font-size: 0.7rem;
   height: 20px;
+  font-weight: 700;
 }
 
 .card-footer {

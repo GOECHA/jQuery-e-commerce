@@ -39,28 +39,30 @@ $(document).ready(function() {
 
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~ Display Data ~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
+
+
 function displayProducts(data) {
   var productContainer = $('#rowProduct');
-
+  
   data.forEach(function(product) {
-    console.log('product', product);
+
+
+    var roundedNum = roundToTwoDecimalPlaces(product.price);
+    
+    
     var productHtml = 
     // `<div class="col productItem">
     `<div class="col card shadow p-3 mb-5 bg-white rounded" style="width: 13rem; height:18rem; align-items: center">
     <img src=${product.image} class="card-img-top object-fit-contain border rounded" alt=${product.title} style="width: 80%; height: 35%;>
     <div class="card-body" style="width: 90%; height: 30%;">
-      <div class="card-title-wrapper">
-      <p class="card-title">${product.title}</p>
+      <div class="card-title-wrapper justify-content-center align-items-center">
+      <p class="font-weight-bold card-title">${product.title}</p>
       </div>
+      <div class="card-description-wrapper">
       <p class="card-text p-description">${product.description}</p>
-     
-      <p class="card-text price"> $${product.price} </p>
-      <p class="card-text price ⭑${product.rating.rate}</p
-      
-      <div class="card-footer">
-        <small class="text-body-secondary">Add to Cart</small>
       </div>
-     
+      <p class="card-text price"> $${roundedNum} </p>
+      <p class="card-text price ⭑${product.rating.rate}</p
     </div>
     </div>`
   // </div>`
@@ -68,4 +70,8 @@ function displayProducts(data) {
   });
 }
 
+// ~~~~~~~~~~~~~~~~~~~~~~~~~~~ Helper Functions ~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
+function roundToTwoDecimalPlaces(number) {
+  return number.toFixed(2);
+}
