@@ -1,27 +1,15 @@
 //$(selector).action() jQuery function formatting
 
 
-$(function() {
-  // Get the favicon URL
-  var faviconUrl = '/favicon.ico';
+// $(function() {
+//   // Get the favicon URL
+//   var faviconUrl = '/favicon.ico';
 
-  // Add the favicon to the document head
-  $('head').append('<link rel="shortcut icon" href="' + faviconUrl + '">');
-});
+//   // Add the favicon to the document head
+//   $('head').append('<link rel="shortcut icon" href="' + faviconUrl + '">');
+// });
 
-
-$(document).ready(function(){
-    
-    $(".btn").click(function(e){
-        e.preventDefault();
-        $("form").hide();
-    });
-});
-
-// $('form').submit(function(e) {
-//     e.preventDefault();
-//   });
-
+// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ Data ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 $.ajax({
   url: 'https://fakestoreapi.com/products',
@@ -34,3 +22,41 @@ $.ajax({
   }
 });
 
+
+// ~~~~~~~~~~~~~~~~~~~~~~~~~~~ Navigation ~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+$(document).ready(function(){
+    
+  $(".navbar-brand").click(function(e){
+      e.preventDefault();
+      
+      $('.page').hide(); 
+      $('#home').show(); 
+  });
+});
+
+$(document).ready(function(){
+    
+    $(".btn-primary").click(function(e){
+        e.preventDefault();
+        
+        $('.page').hide(); 
+        $('#products').show(); 
+    });
+});
+
+
+
+$(document).ready(function() {
+  $('a.nav-link').on('click', function(e) {
+    e.preventDefault(); 
+
+    var target = $(this).attr('href'); 
+    $('.page').hide(); 
+    $(target).show(); 
+  });
+
+  $('.page').hide();
+  $('#home').show();
+
+});
