@@ -7,6 +7,10 @@
 @import "../node_modules/bootstrap/scss/images";
 @import "../node_modules/bootstrap/scss/grid";
 
+*{
+  border: 1px purple solid;
+}
+
 
 .products-container{
     @include make-container();
