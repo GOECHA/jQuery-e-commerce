@@ -1,4 +1,4 @@
-//$(selector).action()
+//$(selector).action() jQuery function formatting
 
 $(document).ready(function(){
     
