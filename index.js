@@ -52,22 +52,22 @@ $(document).ready(function() {
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~ Display Data ~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 function displayProducts(data) {
+  var productContainer = $('#mainProductWrapper');
 
-  var productContainer = $('#productContainer');
-
-  // Iterate over each product in the data
   data.forEach(function(product) {
-    console.log('product', product)
+    console.log('product', product);
     var productHtml = '<div class="product">' +
-      '<img src="' + product.image + '" alt="' + product.name + '">' +
+      '<div class="row">' +
+      '<div class="col-lg-4 col-md-6 col-sm-12">' +
+      '<img class="img-fluid" src="' + product.image + '" alt="' + product.name + '">' +
       '<h3>' + product.title + '</h3>' +
       '<p>' + product.description + '</p>' +
+      '</div>' +
+      '</div>' +
       '</div>';
 
-    // Append the product HTML to the product container
     productContainer.append(productHtml);
   });
 }
-
 
 
