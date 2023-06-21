@@ -1,9 +1,9 @@
 //$(selector).action()
 
 $(document).ready(function(){
-    e.preventDefault();
-
-    $(".btn").click(function(){
+    
+    $(".btn").click(function(e){
+        e.preventDefault();
         $("form").hide();
     });
 });
@@ -11,3 +11,15 @@ $(document).ready(function(){
 // $('form').submit(function(e) {
 //     e.preventDefault();
 //   });
+
+
+$.ajax({
+  url: 'https://fakestoreapi.com/products',
+  method: 'GET',
+  success: function(data) {
+    console.log('data', data)
+  },
+  error: function(error) {
+    alert(error);
+  }
+});
