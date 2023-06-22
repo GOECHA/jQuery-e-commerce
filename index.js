@@ -91,41 +91,37 @@ $(document).ready(function () {
     displayCartItems();
   });
 
- 
-  
   displayCartItems();
 
   function displayCartItems() {
     var cartItems = JSON.parse(localStorage.getItem("cartItems")) || [];
-console.log('cartItems', cartItems)
+    console.log("cartItems", cartItems);
     var cartItemsContainer = $("#cartItemsContainer");
     var cartItemsContainerTotalPrice = $("#cartItemsContainerTotalPrice");
-    
+
     cartItemsContainer.empty();
 
     cartItems.forEach(function (item, index) {
-
       var roundedNum = roundToTwoDecimalPlaces(item.price);
       let itemPrice = totalItemPrice(item.quantity, roundedNum);
-      var itemQty = item.quantity
+      var itemQty = item.quantity;
 
+      function qtyNums(qty) {
+        const numbers = Array.from({ length: qty }, (_, index) => index + 1);
+        const listItems = numbers.map(
+          (number) =>
+            `<li className="dropNum"><a class="dropdown-item" id="${number}" href="#">${number}</a></li>`
+        );
+        return listItems;
+      }
 
-     function qtyNums(qty) {
-      const numbers = Array.from({ length: qty }, (_, index) => index + 1);
-      const listItems = numbers.map((number) => `<li className="dropNum"><a class="dropdown-item" id="${number}" href="#">${number}</a></li>`);
-      return listItems;
-    }
-
-   
-     const quantityList = qtyNums(itemQty)
-    
-
-    
+      const quantityList = qtyNums(itemQty);
+       console.log('quantityList', quantityList[0])
       var cartItemHtml = `
         <tr>
           <th scope="row">${index + 1}</th>
           <td>${item.name}</td>
-          <td>$${roundedNum}</td>
+          <td class="single-itm-price" id="singleItmPrice">$${roundedNum}</td>
           
 
           <td>
@@ -146,67 +142,84 @@ console.log('cartItems', cartItems)
        </div>
           </div>
           </td>
-          <td> $${itemPrice}</td>
+          <td class="total-qty-price" id="totalQtyPrice"> $${itemPrice}</td>
           <td>
           <a class="delete-item text-center d-flex justify-content-center align-items-center" href="#" id="deleteItemButton${index}" data-index="${index}">🅇</a> 
           </td>
         </tr>`;
 
+      $(document).on("click", ".dropdown-item", function () {
+        var idString = $(this).attr("id");
 
-    var dropDownQty = $("#dropdownMenuButton1");
+        var id = parseInt(idString, 10);
+        var dropdownMenu = $(this)
+          .closest(".dropdown")
+          .find(".dropdown-toggle");
+        dropdownMenu.text(id);
 
-    console.log('quantityList', quantityList)
+        $("#totalQtyPrice").text(itemPrice);
+        localStorage.setItem("selectedQuantity", itemQty);
 
-    $("<li>").on("change", function() {
-     // Get the selected value
-     var value = $(this).val();
-   
-     // Update the qty
-     $("#dropdownMenuButton1").text(value);
-   });
+      });
 
+
+        // $("#dropdownMenuButton1").on("change", function() {
+        //   var selectedQuantity = parseInt(
+        //     localStorage.getItem("selectedQuantity"),10);
+  
+        //   if (!isNaN(selectedQuantity)) {
+        //     var dropdownMenu = $(".drop-down-tem"); 
+        //     dropdownMenu.text(selectedQuantity);
+        //     var updateItemPrice = selectedQuantity * itemPrice
+        //     console.log('updateItemPrice', updateItemPrice)
+        //    // Replace `calculateTotalPrice` with your actual calculation logic
+        //     $("#totalQtyPrice").text(updateItemPrice);
+        //   }
+          // var qty = $(this).val();
+          // var price = qty * itemPrice;
+          // console.log('price185', price)
+          // $(".total-qty-price").text(price);
+          
+        // });
 
       cartItemsContainer.append(cartItemHtml);
-      // dropDownQty.append();
-    
+      // ("#totalQtyPrice").append(itemPrice);
     });
-
 
     cartItemsContainerTotalPrice.empty();
 
-    let totalPrice = cartItems.reduce((total, item) =>  total += (item.price * item.quantity), 0)
+    let totalPrice = cartItems.reduce(
+      (total, item) => (total += item.price * item.quantity),
+      0
+    );
 
+    var cartTotalPriceItemHtml = `$${roundToTwoDecimalPlaces(totalPrice)}`;
 
-    var cartTotalPriceItemHtml = `$${roundToTwoDecimalPlaces(totalPrice)}`
-    
-    
-     cartItemsContainerTotalPrice.append(cartTotalPriceItemHtml);
+    cartItemsContainerTotalPrice.append(cartTotalPriceItemHtml);
 
-   
     $(".delete-item").on("click", function (e) {
       e.preventDefault();
-      var container = $("#container")
-      var goShoppingMsg = 
-      `<h2 class="text-center pg-title-wrapper p-4 text-overlay position-absolute top-50 start-50 translate-middle text-center text-white">
+      var container = $("#container");
+      var goShoppingMsg = `<h2 class="text-center pg-title-wrapper p-4 text-overlay position-absolute top-50 start-50 translate-middle text-center text-white">
       As you set forth on your shopping adventure, your cart eagerly awaits its first treasure to be added.</h2>
-      `
-      
-      
-      
+      `;
+
       var index = $(this).data("index");
       cartItems.splice(index, 1);
       localStorage.setItem("cartItems", JSON.stringify(cartItems));
-      $("#cartItemsContainerTotalPrice").empty();  
+      $("#cartItemsContainerTotalPrice").empty();
       if (cartItems.length === 0) {
         container.empty().append(goShoppingMsg);
       } else {
         displayCartItems();
       }
     });
-
   }
- 
 });
+
+// ~~~~~~~~~~~~~~~~~~~~~~~~~~~ Search Data ~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+
 
 
 
@@ -217,15 +230,13 @@ function roundToTwoDecimalPlaces(number) {
   return number.toFixed(2);
 }
 
-function totalItemPrice(qty, price){
+function totalItemPrice(qty, price) {
   return qty * price;
 }
 
-function subtractItemPrice(totalPrice, qty, price){
-return totalPrice - totalItemPrice(qty, price);
+function subtractItemPrice(totalPrice, qty, price) {
+  return totalPrice - totalItemPrice(qty, price);
 }
-
-
 
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~ Error Handling ~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
