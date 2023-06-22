@@ -207,6 +207,22 @@ p {
 
 /* ~~~~~~~~~~~mobile device~~~~~~~~~~~~~~~ */
 
-@media screen and (max-width: 480px) {
- 
+@media screen and (max-width: 576px) {
+  .pg-title-wrapper{
+    display: flex;
+    flex-direction: column;
+    text-align: center !important;
+
+  }
+
+  .input-group {
+    justify-content: center !important;
+  }
+
+  .cart-items-container{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
 }
