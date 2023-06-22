@@ -58,16 +58,14 @@ function displayProducts(data) {
   });
 }
 
-
-
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ Search Data ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-$('#searchByName').on('input', function() {
+$("#searchByName").on("input", function () {
   var searchTerm = $(this).val().toLowerCase();
-  var cards = $('.card');
+  var cards = $(".card");
 
-  cards.each(function() {
-    var title = $(this).find('.card-title').text().toLowerCase();
+  cards.each(function () {
+    var title = $(this).find(".card-title").text().toLowerCase();
 
     if (title.includes(searchTerm)) {
       $(this).show();
@@ -77,57 +75,57 @@ $('#searchByName').on('input', function() {
   });
 });
 
-$('#btnSort').click(function() {
+$("#btnSort").click(function () {
+  var cards = $(".card");
 
-  var cards = $('.card');
-
-  var titles = cards.map(function() {
-    return $(this).find('.card-title').text();
-  }).get();
+  var titles = cards
+    .map(function () {
+      return $(this).find(".card-title").text();
+    })
+    .get();
 
   titles.sort();
 
   var productContainer = $("#rowProduct");
   productContainer.empty();
 
-  titles.forEach(function(title) {
-    var card = cards.filter(function() {
-      return $(this).find('.card-title').text() === title;
+  titles.forEach(function (title) {
+    var card = cards.filter(function () {
+      return $(this).find(".card-title").text() === title;
     });
 
     productContainer.append(card);
   });
 });
 
+$("#btnRating").click(function () {
+  var cards = $(".card");
 
-$('#btnRating').click(function() {
-  var cards = $('.card');
+  var ratings = cards
+    .map(function () {
+      return parseFloat($(this).find("#cardRating").text().substring(1));
+    })
+    .get();
 
-  var ratings = cards.map(function() {
-    return parseFloat($(this).find('#cardRating').text().substring(1)); 
-  }).get();
-
-
-  ratings.sort(function(a, b) {
+  ratings.sort(function (a, b) {
     return b - a;
   });
 
   var productContainer = $("#rowProduct");
   productContainer.empty();
 
-  ratings.forEach(function(rating) {
-    var card = cards.filter(function() {
-      return parseFloat($(this).find('#cardRating').text().substring(1)) === rating;
+  ratings.forEach(function (rating) {
+    var card = cards.filter(function () {
+      return (
+        parseFloat($(this).find("#cardRating").text().substring(1)) === rating
+      );
     });
-console.log('card', card)
+    console.log("card", card);
     productContainer.append(card);
   });
 });
 
-
-
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~ Display Cart Items ~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
 
 $(document).ready(function () {
   $("#rowProduct").on("click", ".add-to-cart-btn", function (e) {
@@ -187,16 +185,13 @@ $(document).ready(function () {
       }
 
       const quantityList = qtyNums(itemQty);
-       console.log('quantityList', quantityList[0])
+      console.log("quantityList", quantityList[0]);
       var cartItemHtml = `
         <tr>
           <th scope="row">${index + 1}</th>
           <td>${item.name}</td>
           <td class="single-itm-price" id="singleItmPrice">$${roundedNum}</td>
-          
-
-          <td>
-           
+          <td>         
           <div class="dropdown">
           <button
              class="btn btn-secondary dropdown-toggle"
@@ -230,28 +225,26 @@ $(document).ready(function () {
 
         $("#totalQtyPrice").text(itemPrice);
         localStorage.setItem("selectedQuantity", itemQty);
-
       });
 
+      // $("#dropdownMenuButton1").on("change", function() {
+      //   var selectedQuantity = parseInt(
+      //     localStorage.getItem("selectedQuantity"),10);
 
-        // $("#dropdownMenuButton1").on("change", function() {
-        //   var selectedQuantity = parseInt(
-        //     localStorage.getItem("selectedQuantity"),10);
-  
-        //   if (!isNaN(selectedQuantity)) {
-        //     var dropdownMenu = $(".drop-down-tem"); 
-        //     dropdownMenu.text(selectedQuantity);
-        //     var updateItemPrice = selectedQuantity * itemPrice
-        //     console.log('updateItemPrice', updateItemPrice)
-        //    // Replace `calculateTotalPrice` with your actual calculation logic
-        //     $("#totalQtyPrice").text(updateItemPrice);
-        //   }
-          // var qty = $(this).val();
-          // var price = qty * itemPrice;
-          // console.log('price185', price)
-          // $(".total-qty-price").text(price);
-          
-        // });
+      //   if (!isNaN(selectedQuantity)) {
+      //     var dropdownMenu = $(".drop-down-tem");
+      //     dropdownMenu.text(selectedQuantity);
+      //     var updateItemPrice = selectedQuantity * itemPrice
+      //     console.log('updateItemPrice', updateItemPrice)
+      //    // Replace `calculateTotalPrice` with your actual calculation logic
+      //     $("#totalQtyPrice").text(updateItemPrice);
+      //   }
+      // var qty = $(this).val();
+      // var price = qty * itemPrice;
+      // console.log('price185', price)
+      // $(".total-qty-price").text(price);
+
+      // });
 
       cartItemsContainer.append(cartItemHtml);
       // ("#totalQtyPrice").append(itemPrice);
@@ -288,10 +281,29 @@ $(document).ready(function () {
   }
 });
 
+// ~~~~~~~~~~~~~~~~~~~~~~~~~~~ Submit Cart Data ~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 
+$(document).ready(function() {
+  $("#btnPurchase").click(function(e) {
+    e.preventDefault();
+    purchaseItems();
+  });
 
+  function purchaseItems() {
+    localStorage.removeItem("cartItems");
+    $("#cartItemsContainer").empty();
+    $("#cartItemsContainerTotalPrice").empty();
 
+    $("#congratsModal").modal("show");
+  }
+});
+
+$(document).ready(function () {
+  $("#congratsModal").on("shown.bs.modal", function () {
+    $("#btnPurchase").trigger("focus");
+  });
+});
 
 
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~ Helper Functions ~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -312,11 +324,23 @@ function subtractItemPrice(totalPrice, qty, price) {
 
 $(document).ready(function () {
   $("#contactForm").submit(function (event) {
+    event.preventDefault();
+
     if (!$("#name").val() || !$("#email").val() || !$("#message").val()) {
-      event.preventDefault();
       alert("Please fill out all the fields.");
     } else {
-      window.location.href = "#submitForm.html";
+      // Clear the form fields
+      $("#name").val("");
+      $("#email").val("");
+      $("#message").val("");
+
+      // Redirect to the #submitForm section
+      $("html, body").animate(
+        {
+          scrollTop: $("#submitForm").offset().top,
+        },
+        800
+      );
     }
   });
 });

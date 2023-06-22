@@ -12,7 +12,7 @@
       integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM"
       crossorigin="anonymous"
     />
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.2.1/css/fontawesome.min.css" integrity="sha384-QYIZto+st3yW+o8+5OHfT6S482Zsvz2WfOzpFSXMF9zqeLcFV0/wlZpMtyFcZALm" crossorigin="anonymous">
+    
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="sha512-6.4.0" crossorigin="anonymous" />
     <link rel="stylesheet" href="scss/styles.css" />
   </head>
@@ -132,34 +132,15 @@
             ></textarea>
           </div>
           <div class="d-flex justify-content-end">
-            <button type="submit" class="nav-link btn btn-grad">Submit</button>
+            <button type="submit" class="nav-link btn btn-grad" href="#submitForm">Submit</button>
           </div>
         </form>
       </div>
     </section>
-
-    <section class="page submit-form" id="submitForm">
-      <div class="position-relative top-0 start-0 end-0 bottom-0">
-        <img src="./assets/cristian-palmer-pZ0u92l06wE-unsplash.jpg" alt="TealRay Boutique Image" class="img-fluid submit-image" />
-        <div class="text-center pg-title-wrapper p-4 text-overlay position-absolute top-50 start-50 translate-middle text-center text-white">
-          <strong>
-            <h1 class="display-4">TealRay Boutique</h1>
-            <h2>Thank you for submitting the contact request form.</h2>
-            <h3 class="appreciate-text">We appreciate your inquiry and will respond to you as soon as possible.</h3>
-          </strong>
-          <a class="navbar-brand" href="#home">
-            <img class="nav-logo2 img-fluid" src="assets/snackcrate-logo2.png" alt="logo" width="50" height="24" />
-            Back to Home
-          </a>
-        </div>
-      </div>
-    </section>
-
     <section class="page cart-items" id="cartItems">
       <div class="container" id="container">
         <div class="pg-title-wrapper p-4">
-     <h2>Cart Items </h2>
-         
+          <h2>Cart Items</h2>
         </div>
         <table class="table rounded shadow p-3 mb-5 bg-white">
           <thead>
@@ -183,11 +164,38 @@
               <td></td>
               <td></td>
               <td id="cartItemsContainerTotalPrice"></td>
+              <td></td>
+              
             </tr>
+         
           </thead>
-          
+        </table>
+    
+        <div class="modal fade" id="congratsModal" tabindex="-1" role="dialog" aria-labelledby="congratsModalLabel" aria-hidden="true">
+          <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="congratsModalLabel">Congratulations!</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body">
+                <p>An email confirmation has been sent to your email address.</p>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary btn-grad" data-dismiss="modal">Close</button>
+              </div>
+            </div>
+          </div>
+        </div>
+    
+        <div>
+          <button class="btn btn-grad btn-purchase" id="btnPurchase" data-toggle="modal" data-target="#congratsModal">Purchase</button>
+        </div>
       </div>
     </section>
+    
 
     <script
       src="https://code.jquery.com/jquery-3.7.0.min.js"
