@@ -3,6 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
     <title>TealRay Boutique</title>
     <!-- Bootstrap CSS -->
     <link
@@ -15,7 +16,7 @@
   </head>
   <body>
     <nav class="navbar navbar-expand-lg navbar-light bg-light shadow">
-      <a class="navbar-brand" href="#home">
+      <a class="nav-link navbar-brand" href="#home">
         <img
           class="nav-logo img-fluid"
           src="assets/snackcrate-logo2.png"
@@ -66,7 +67,7 @@
         >
           <h1 class="display-4">TealRay Boutique</h1>
           <h2 class="h4">Unlock the Best of Fashion and Innovation</h2>
-          <a class="btn btn-grad" href="#products"> Explore </a>
+          <a class="nav-link btn btn-grad" href="#products"> Explore </a>
         </div>
       </div>
     </section>
@@ -84,12 +85,13 @@
     </div>
     </section>
 
+    
     <section class="page contact" id="contact">
       <div class="container">
         <div class="pg-title-wrapper p-4">
           <h2>Contact Us</h2>
         </div>
-        <form>
+        <form method="POST" id="contactForm">
           <div class="mb-3">
             <label for="name" class="form-label">Name</label>
             <input
@@ -118,25 +120,60 @@
             ></textarea>
           </div>
           <div class="d-flex justify-content-end">
-            <button type="submit" class="btn btn-grad">Submit</button>
+            <button type="submit" class="nav-link btn btn-grad">Submit</button>
           </div>
         </form>
+      </div>
+    </section>
+
+    <section class="page submit-form" id="submitForm">
+      <div class="position-relative top-0 start-0 end-0 bottom-0">
+        <img src="./assets/cristian-palmer-pZ0u92l06wE-unsplash.jpg" alt="TealRay Boutique Image" class="img-fluid submit-image" />
+        <div class="text-center pg-title-wrapper p-4 text-overlay position-absolute top-50 start-50 translate-middle text-center text-white">
+          <strong>
+            <h1 class="display-4">TealRay Boutique</h1>
+            <h2>Thank you for submitting the contact request form.</h2>
+            <h3 class="appreciate-text">We appreciate your inquiry and will respond to you as soon as possible.</h3>
+          </strong>
+          <a class="navbar-brand" href="#home">
+            <img class="nav-logo2 img-fluid" src="assets/snackcrate-logo2.png" alt="logo" width="50" height="24" />
+            Back to Home
+          </a>
+        </div>
       </div>
     </section>
 
     <section class="page cart-items" id="cartItems">
       <div class="container">
         <div class="pg-title-wrapper p-4">
-          <h2>Cart Items</h2>
+     <h2>Cart Items </h2>
+         
         </div>
-        <div class="row">
-          <div class="col-md-4">
-            <div class="product">
-              <button type="submit" class="btn btn-grad">Check out!</button>
-            </div>
-          </div>
-          <!-- Repeat the above column divs for the remaining products -->
-        </div>
+        <table class="table rounded shadow p-3 mb-5 bg-white">
+          <thead>
+            <tr>
+              <th scope="col">#</th>
+              <th scope="col">Item</th>
+              <th scope="col">Price</th>
+              <th scope="col">Qty</th>
+              <th scope="col">Total Item Price</th>
+              <th>Delete All</th>
+
+            </tr>
+          </thead>
+          <tbody id="cartItemsContainer">
+          
+          </tbody>
+          <thead>
+            <tr>
+              <th scope="col">Total Price</th>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td id="cartItemsContainerTotalPrice"></td>
+            </tr>
+          </thead>
+          
       </div>
     </section>
 

@@ -13277,6 +13277,11 @@ body,
   font: #fff;
 }
 
+.nav-logo2 {
+  mix-blend-mode: multiply;
+  background: transparent !important;
+}
+
 .products-container {
   --bs-gutter-x: 10px;
   --bs-gutter-y: 0;
@@ -13309,7 +13314,7 @@ body,
   width: 100%;
   width: 20rem;
   margin: 10px;
-  padding: 0;
+  padding: 0 !important;
 }
 @media (min-width: 480px) {
   .card {
@@ -13325,8 +13330,14 @@ body,
   }
 }
 
-.nav-logo {
+.card-body {
+  padding: 0.1rem;
+}
+
+.nav-logo,
+.nav-logo2 {
   mix-blend-mode: multiply;
+  background: transparent !important;
 }
 
 .card-img-top {
@@ -13334,12 +13345,17 @@ body,
   mix-blend-mode: multiply;
 }
 
+.submit-image {
+  opacity: 0.5;
+}
+
 .btn-cart {
   font-size: 0.7rem;
   padding: 0;
 }
 
-.btn-grad {
+.btn-grad,
+.btn-grad2 {
   background-image: linear-gradient(to right, #4CB8C4 0%, #3CD3AD 51%, #4CB8C4 100%);
   background-position: left center;
   background-size: 200% auto;
@@ -13355,8 +13371,25 @@ body,
   text-decoration: none;
 }
 
-.btn-grad:hover {
+.btn-grad2 {
+  padding: 3px;
+  width: 95%;
+  margin-top: 5px;
+  margin-bottom: 7px;
+  border-radius: 7px;
+  position: bottom sticky;
+  border: none;
+}
+
+.btn-grad:hover,
+.btn-grad2:hover {
   background-position: right center;
+}
+
+.delete-item {
+  color: #dc3545;
+  height: 12px;
+  width: 12px;
 }
 
 .card {
@@ -13374,15 +13407,15 @@ p {
 }
 
 .card-title {
-  font-size: 0.7rem;
-  padding-top: 0.1rem;
+  font-size: 0.6rem;
+  padding-top: 5px;
   padding-bottom: 0.1rem;
   font-weight: 900;
 }
 
 .card-description-wrapper {
   max-width: 90%;
-  height: 70px;
+  height: 60px;
   -webkit-mask-image: linear-gradient(180deg, #000 60%, transparent);
 }
 
@@ -13392,6 +13425,7 @@ p {
 
 .p-description {
   width: 90%;
+  margin: 0;
 }
 
 .price {
@@ -13401,7 +13435,6 @@ p {
 }
 
 .card-footer {
-  width: 100%;
   background-color: #20c997;
 }
 

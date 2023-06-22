@@ -18,7 +18,10 @@ body,
   background-image: linear-gradient(90deg, $primary-color 0%, $secondary-color 100%);
   font: $white;
 }
-
+.nav-logo2{
+  mix-blend-mode: multiply;
+  background: transparent !important;
+}
   // ~~~~~~~~~~~~~~~~~~~~~~ Product Grid ~~~~~~~~~~~~~~~~~~~~~~  
   .products-container {
     @include make-container();
@@ -44,21 +47,31 @@ body,
       @include make-col(1, 3);
     }
     margin: 10px;
-    padding: 0;
+    padding: 0 !important;
   
+  }
+  .card-body{
+    padding:.1rem;
   }
 
 
 
 
 // ~~~~~~~~~~~~~~~~~~~~~~ Images ~~~~~~~~~~~~~~~~~~~~~~  
-.nav-logo{
+.nav-logo,
+.nav-logo2{
   mix-blend-mode: multiply;
+  background: transparent !important;
 }
 
 .card-img-top {
   margin-top: 0.5rem;
   mix-blend-mode: multiply;
+}
+
+
+.submit-image{
+  opacity: 0.5;
 }
 
 // ~~~~~~~~~~~~~~~~~~~~~~ Navigation ~~~~~~~~~~~~~~~~~~~~~~  
@@ -68,7 +81,8 @@ font-size: 0.7rem;
 padding: 0;
 }
 
-.btn-grad {
+.btn-grad,
+.btn-grad2{
   background-image: linear-gradient(to right, #4CB8C4 0%, #3CD3AD 51%, #4CB8C4 100%);
   background-position: left center;
   background-size: 200% auto;
@@ -84,8 +98,25 @@ padding: 0;
   text-decoration: none;
 }
 
-.btn-grad:hover {
+.btn-grad2{
+  padding: 3px;
+  width: 95%;
+  margin-top: 5px;
+  margin-bottom: 7px;
+  border-radius: 7px;
+  position: bottom sticky;
+  border: none;
+}
+
+.btn-grad:hover,
+.btn-grad2:hover {
   background-position: right center;
+}
+
+.delete-item{
+  color: $red;
+  height: 12px;
+  width: 12px;
 }
 
 // ~~~~~~~~~~~~~~~~~~~~~~ Products ~~~~~~~~~~~~~~~~~~~~~~  
@@ -107,14 +138,14 @@ p {
 }
 
 .card-title {
-  font-size: 0.7rem;
-  padding-top: .1rem;
+  font-size: 0.6rem;
+  padding-top: 5px;
   padding-bottom: .1rem;
   font-weight: 900;
 }
 .card-description-wrapper{
   max-width: 90%;
-  height: 70px;
+  height: 60px;
   -webkit-mask-image: linear-gradient(180deg, #000 60%, transparent);
 }
 
@@ -124,6 +155,7 @@ p {
 
 .p-description {
   width: 90%;
+  margin:0;
 }
 
 .price {
@@ -134,7 +166,6 @@ p {
 }
 
 .card-footer {
-  width: 100%;
   background-color: $teal;
-
 }
+

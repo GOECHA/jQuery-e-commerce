@@ -16,4 +16,23 @@ $.ajax({
     }
   });
 
-  
+// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ POST ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+
+
+function addToCart(productId) {
+  var data = { productId: productId };
+
+  $.ajax({
+    url: "#cartItems",
+    method: "POST",
+    data: JSON.stringify(data),
+    contentType: "application/json",
+    success: function(response) {
+      console.log("Product added to cart successfully.");
+    },
+    error: function(xhr, status, error) {
+      console.log("Error adding product to cart:", error);
+    }
+  });
+}
