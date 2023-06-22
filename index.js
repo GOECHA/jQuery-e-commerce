@@ -91,8 +91,9 @@ $(document).ready(function () {
     displayCartItems();
   });
 
+ 
   
-  // displayCartItems();
+  displayCartItems();
 
   function displayCartItems() {
     var cartItems = JSON.parse(localStorage.getItem("cartItems")) || [];
@@ -105,8 +106,27 @@ console.log('cartItems', cartItems)
 
       var roundedNum = roundToTwoDecimalPlaces(item.price);
       let itemPrice = totalItemPrice(item.quantity, roundedNum);
-     
-     
+     let itemQty = item.quantity
+
+
+     function qtyNums(qty) {
+      const numbers = Array.from({ length: qty }, (_, index) => index + 1);
+      const listItems = numbers.map((number) => `<li><a class="dropdown-item" href="#">${number}</a></li>`);
+      return listItems;
+    }
+
+
+     console.log('itemQty', itemQty)
+     console.log('qtyNums(itemQty)', qtyNums(itemQty))
+     const quantityList = qtyNums(itemQty)
+      // <div class="dropdown">
+            //   <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton${index}" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            //   ${item.quantity}
+            //   </button>
+            //   <div class="dropdown-menu" aria-labelledby="dropdownMenuButton${index}">
+            //     <!-- Quantity options will be dynamically generated here -->
+            //   </div>
+            // </div>
       var cartItemHtml = `
         <tr>
           <th scope="row">${index + 1}</th>
@@ -115,17 +135,25 @@ console.log('cartItems', cartItems)
           
 
           <td>
-            <div class="dropdown">
-              <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton${index}" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-              ${item.quantity}
-              </button>
-              <div class="dropdown-menu" aria-labelledby="dropdownMenuButton${index}">
-                <!-- Quantity options will be dynamically generated here -->
-              </div>
-            </div>
            
+          <div class="dropdown">
+          <button
+             class="btn btn-secondary dropdown-toggle"
+             type="button"
+             id="dropdownMenuButton1"
+             data-bs-toggle="dropdown"
+             aria-expanded="false"
+          >
+          ${itemQty}
+          </button>
+          <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+        ${quantityList}
+
+          </ul>
+       </div>
+          </div>
           </td>
-          <td> $${itemPrice} console.log('$${itemPrice}',${itemPrice})</td>
+          <td> $${itemPrice}</td>
           <td>
           <a class="delete-item text-center d-flex justify-content-center align-items-center" href="#" id="deleteItemButton${index}" data-index="${index}">🅇</a> 
           </td>
@@ -133,21 +161,23 @@ console.log('cartItems', cartItems)
 
       cartItemsContainer.append(cartItemHtml);
 
-      var dropdownMenu = $(`#dropdownMenuButton${index}`).next(".dropdown-menu");
-      dropdownMenu.empty();
+    
 
-      var quantityOptions = Array.from({ length: item.quantity }, (_, i) => i + 1);
+    //   var dropdownMenu = $(`#dropdownMenuButton${index}`).next(".dropdown-menu");
+    //   dropdownMenu.empty();
 
-      $.each(quantityOptions, function (_, quantity) {
-        var optionHtml = `<a class="dropdown-item quantity-option" href="#" data-quantity="${quantity}">${quantity}</a>`;
-        dropdownMenu.append(optionHtml);
-      });
+    //   var quantityOptions = Array.from({ length: item.quantity }, (_, i) => i + 1);
 
-      dropdownMenu.on("click", ".quantity-option", function (e) {
-        e.preventDefault();
-        var selectedQuantity = $(this).data("quantity");
-        console.log("selectedQuantity", selectedQuantity);
-      });
+    //   $.each(quantityOptions, function (_, quantity) {
+    //     var optionHtml = `<a class="dropdown-item quantity-option" href="#" data-quantity="${quantity}">${quantity}</a>`;
+    //     dropdownMenu.append(optionHtml);
+    //   });
+
+    //   dropdownMenu.on("click", ".quantity-option", function (e) {
+    //     e.preventDefault();
+    //     var selectedQuantity = $(this).data("quantity");
+    //     console.log("selectedQuantity", selectedQuantity);
+    //   });
     });
 
 
@@ -164,12 +194,23 @@ console.log('cartItems', cartItems)
    
     $(".delete-item").on("click", function (e) {
       e.preventDefault();
-
+      var container = $("#container")
+      var goShoppingMsg = 
+      `<h2 class="text-center pg-title-wrapper p-4 text-overlay position-absolute top-50 start-50 translate-middle text-center text-white">
+      As you set forth on your shopping adventure, your cart eagerly awaits its first treasure to be added.</h2>
+      `
+      
+      
+      
       var index = $(this).data("index");
       cartItems.splice(index, 1);
       localStorage.setItem("cartItems", JSON.stringify(cartItems));
       $("#cartItemsContainerTotalPrice").empty();  
-      displayCartItems();
+      if (cartItems.length === 0) {
+        container.empty().append(goShoppingMsg);
+      } else {
+        displayCartItems();
+      }
     });
 
   }
@@ -192,6 +233,8 @@ function totalItemPrice(qty, price){
 function subtractItemPrice(totalPrice, qty, price){
 return totalPrice - totalItemPrice(qty, price);
 }
+
+
 
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~ Error Handling ~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
