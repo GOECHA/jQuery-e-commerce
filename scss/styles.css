@@ -13395,11 +13395,17 @@ body,
 .btn-sort-name,
 .btn-filter-type,
 .btn-sort-stars {
-  width: 10px;
+  width: 30px;
   height: 37px;
   font-size: 0.5rem;
   margin-top: 0;
   margin-bottom: 0;
+  padding: 0;
+}
+
+.btn-sort-name,
+.btn-sort-stars {
+  width: 100px;
 }
 
 .card {

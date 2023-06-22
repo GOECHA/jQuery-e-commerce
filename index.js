@@ -31,7 +31,7 @@ $(document).ready(function () {
   $("#home").show();
 });
 
-// ~~~~~~~~~~~~~~~~~~~~~~~~~~~ Display Data ~~~~~~~~~~~~~~~~~~~~~~~~~~~
+// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ Display Products ~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 function displayProducts(data) {
   var productContainer = $("#rowProduct");
@@ -49,7 +49,7 @@ function displayProducts(data) {
             <p class="card-text p-description">${product.description}</p>
           </div>
           <p class="card-text price"> $${roundedNum} </p>
-          <p class="card-text price">⭑${product.rating.rate}</p>
+          <p class="card-text price" id="cardRating">⭑${product.rating.rate}</p>
         </div>
           <button class="btn-grad2 add-to-cart-btn" data-product-id="${product.id}" data-product-name="${product.title}" data-product-price="${product.price}" >Add to Cart</button>
       </div>`;
@@ -57,6 +57,77 @@ function displayProducts(data) {
     productContainer.append(productHtml);
   });
 }
+
+
+
+// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ Search Data ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+$('#searchByName').on('input', function() {
+  var searchTerm = $(this).val().toLowerCase();
+  var cards = $('.card');
+
+  cards.each(function() {
+    var title = $(this).find('.card-title').text().toLowerCase();
+
+    if (title.includes(searchTerm)) {
+      $(this).show();
+    } else {
+      $(this).hide();
+    }
+  });
+});
+
+$('#btnSort').click(function() {
+
+  var cards = $('.card');
+
+  var titles = cards.map(function() {
+    return $(this).find('.card-title').text();
+  }).get();
+
+  titles.sort();
+
+  var productContainer = $("#rowProduct");
+  productContainer.empty();
+
+  titles.forEach(function(title) {
+    var card = cards.filter(function() {
+      return $(this).find('.card-title').text() === title;
+    });
+
+    productContainer.append(card);
+  });
+});
+
+
+$('#btnRating').click(function() {
+  var cards = $('.card');
+
+  var ratings = cards.map(function() {
+    return parseFloat($(this).find('#cardRating').text().substring(1)); 
+  }).get();
+
+
+  ratings.sort(function(a, b) {
+    return b - a;
+  });
+
+  var productContainer = $("#rowProduct");
+  productContainer.empty();
+
+  ratings.forEach(function(rating) {
+    var card = cards.filter(function() {
+      return parseFloat($(this).find('#cardRating').text().substring(1)) === rating;
+    });
+console.log('card', card)
+    productContainer.append(card);
+  });
+});
+
+
+
+// ~~~~~~~~~~~~~~~~~~~~~~~~~~~ Display Cart Items ~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
 
 $(document).ready(function () {
   $("#rowProduct").on("click", ".add-to-cart-btn", function (e) {
@@ -217,7 +288,6 @@ $(document).ready(function () {
   }
 });
 
-// ~~~~~~~~~~~~~~~~~~~~~~~~~~~ Search Data ~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 
 

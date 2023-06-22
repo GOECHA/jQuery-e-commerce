@@ -12,6 +12,8 @@
       integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM"
       crossorigin="anonymous"
     />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.2.1/css/fontawesome.min.css" integrity="sha384-QYIZto+st3yW+o8+5OHfT6S482Zsvz2WfOzpFSXMF9zqeLcFV0/wlZpMtyFcZALm" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="sha512-6.4.0" crossorigin="anonymous" />
     <link rel="stylesheet" href="scss/styles.css" />
   </head>
   <body>
@@ -80,22 +82,20 @@
         <p>A Collection Blending Fashion, Functionality, and Fun</p>
       </div>
       <div class="product-btn-container d-flex justify-content-end align-items-center">
-        <div class="input-group">
+        <div class="input-group d-flex justify-content-end ">
           <div class="form-outline">
-            <input type="search" id="form1" class="form-control" placeholder="Search by Name" />
+            <input type="search" id="searchByName" class="form-control search-by-name" placeholder="Search by Name" />
             <label class="form-label" for="form1"></label>
           </div>
-        <button class="btn btn-grad btn-sort-name"><i class="fas fa-search"></i></button>
-        </div>
-        <button class="btn btn-grad btn-filter-type">Sort Alphabetically</button>
-        <button class="btn btn-grad btn-sort-stars"> Sort by Most Popular</button>
+        <button class="btn btn-grad btn-filter-type" id="btnFilter"><i class="fas fa-search"></i></button>
+        <button class="btn btn-grad btn-sort-name" id="btnSort">Sort A-Z</button>
+        <button class="btn btn-grad btn-sort-stars" id="btnRating"> Sort by Rating</button>
+      </div>
 
       </div>
       <div class="products-container text-center" id="productContainer">
         <div class="product-row justify-content-center" id="rowProduct"></div>
       </div>
-      <div class="search-container" id="searchContainer"></div>
-    </div>
     </section>
 
     
