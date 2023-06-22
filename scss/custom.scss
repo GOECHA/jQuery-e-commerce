@@ -116,9 +116,18 @@ padding: 0;
 .delete-item{
   color: $red;
   height: 12px;
-  width: 12px;
+  width: 5px;
 }
 
+.btn-sort-name,
+.btn-filter-type,
+.btn-sort-stars{
+  width: 10px;
+  height: 37px;
+  font-size: .5rem;
+  margin-top: 0;
+  margin-bottom: 0;
+}
 // ~~~~~~~~~~~~~~~~~~~~~~ Products ~~~~~~~~~~~~~~~~~~~~~~  
 
   

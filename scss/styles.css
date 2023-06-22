@@ -13389,7 +13389,17 @@ body,
 .delete-item {
   color: #dc3545;
   height: 12px;
-  width: 12px;
+  width: 5px;
+}
+
+.btn-sort-name,
+.btn-filter-type,
+.btn-sort-stars {
+  width: 10px;
+  height: 37px;
+  font-size: 0.5rem;
+  margin-top: 0;
+  margin-bottom: 0;
 }
 
 .card {

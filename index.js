@@ -100,33 +100,27 @@ $(document).ready(function () {
 console.log('cartItems', cartItems)
     var cartItemsContainer = $("#cartItemsContainer");
     var cartItemsContainerTotalPrice = $("#cartItemsContainerTotalPrice");
+    
     cartItemsContainer.empty();
 
     cartItems.forEach(function (item, index) {
 
       var roundedNum = roundToTwoDecimalPlaces(item.price);
       let itemPrice = totalItemPrice(item.quantity, roundedNum);
-     let itemQty = item.quantity
+      var itemQty = item.quantity
 
 
      function qtyNums(qty) {
       const numbers = Array.from({ length: qty }, (_, index) => index + 1);
-      const listItems = numbers.map((number) => `<li><a class="dropdown-item" href="#">${number}</a></li>`);
+      const listItems = numbers.map((number) => `<li className="dropNum"><a class="dropdown-item" id="${number}" href="#">${number}</a></li>`);
       return listItems;
     }
 
-
-     console.log('itemQty', itemQty)
-     console.log('qtyNums(itemQty)', qtyNums(itemQty))
+   
      const quantityList = qtyNums(itemQty)
-      // <div class="dropdown">
-            //   <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton${index}" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            //   ${item.quantity}
-            //   </button>
-            //   <div class="dropdown-menu" aria-labelledby="dropdownMenuButton${index}">
-            //     <!-- Quantity options will be dynamically generated here -->
-            //   </div>
-            // </div>
+    
+
+    
       var cartItemHtml = `
         <tr>
           <th scope="row">${index + 1}</th>
@@ -147,8 +141,7 @@ console.log('cartItems', cartItems)
           ${itemQty}
           </button>
           <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-        ${quantityList}
-
+         ${quantityList}
           </ul>
        </div>
           </div>
@@ -159,25 +152,23 @@ console.log('cartItems', cartItems)
           </td>
         </tr>`;
 
+
+    var dropDownQty = $("#dropdownMenuButton1");
+
+    console.log('quantityList', quantityList)
+
+    $("<li>").on("change", function() {
+     // Get the selected value
+     var value = $(this).val();
+   
+     // Update the qty
+     $("#dropdownMenuButton1").text(value);
+   });
+
+
       cartItemsContainer.append(cartItemHtml);
-
+      // dropDownQty.append();
     
-
-    //   var dropdownMenu = $(`#dropdownMenuButton${index}`).next(".dropdown-menu");
-    //   dropdownMenu.empty();
-
-    //   var quantityOptions = Array.from({ length: item.quantity }, (_, i) => i + 1);
-
-    //   $.each(quantityOptions, function (_, quantity) {
-    //     var optionHtml = `<a class="dropdown-item quantity-option" href="#" data-quantity="${quantity}">${quantity}</a>`;
-    //     dropdownMenu.append(optionHtml);
-    //   });
-
-    //   dropdownMenu.on("click", ".quantity-option", function (e) {
-    //     e.preventDefault();
-    //     var selectedQuantity = $(this).data("quantity");
-    //     console.log("selectedQuantity", selectedQuantity);
-    //   });
     });
 
 
