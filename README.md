@@ -1,4 +1,7 @@
 # snackcrate-assessment
+
+[Deployed Link](https://chantal-goethals-snackcrate-assessment.vercel.app/)
+
 Create a responsive webpage Application with jQuery, Bootstrap & Sass. 
 --
 - Navigation bar with logo and menu links on the right 
@@ -101,6 +104,11 @@ Scripts
       crossorigin="anonymous"
     ></script>
  ```   
+API
+
+```
+ 'https://fakestoreapi.com/products'
+```
 
 Remember to reload complier with all css changes
 ```sass custom.scss styles.css```
