@@ -200,7 +200,7 @@ console.log({productPrice})
           (number) =>
             `<a class="dropdown-item" data-product-id="${item.id}" data-product-price="${roundedNum}" href="#">${number}</a>`
         );
-        console.log('item.id', item.id)
+    
         return listItems;
       }
       
@@ -237,6 +237,7 @@ console.log({productPrice})
             <a class="delete-item text-center d-flex justify-content-center align-items-center" href="#" id="deleteItemButton${index}" data-index="${index}">🅇</a> 
           </td>
         </tr>`;
+        
 
 
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~ Update Price with Dropdown ~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -287,6 +288,8 @@ console.log({productPrice})
 
     cartItemsContainerTotalPrice.append(cartTotalPriceItemHtml);
 
+
+
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~ Increase || Decrease Cart Items ~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 function increaseQuantity(productId) {
@@ -322,7 +325,7 @@ console.log('dropdownMenu', dropdownMenu)
     
 function decreaseQuantity(productId) {
   // Find the dropdown menu associated with the product ID
-  var dropdownMenu = $(`[data-product-id="${productId}"]`).find(".dropdown-menu");
+  var dropdownMenu = $(`[data-product-id="${productId}"] dropdown-menu`);
 console.log('productId: ' + productId)
   // Get the current selected quantity from the dropdown
   var selectedQuantity = parseFloat(dropdownMenu.siblings(".dropdown-toggle").text()) || 0;
@@ -353,13 +356,16 @@ console.log('productId: ' + productId)
 
 
 $(document).on("click", ".increase-itm-btn", function() {
-  var productId = $(this).data("data-product-id");
+  var productId = $(this).data("product-id");
+  console.log('productId 357', productId)
   increaseQuantity(productId);
 });
 
 
 $(document).on("click", ".decrease-itm-btn", function() {
-  var productId = $(this).data("data-product-id");
+  var productId = $(this).data("product-id");
+  console.log('productId 364', productId)
+
   decreaseQuantity(productId);
 });
 
@@ -407,6 +413,9 @@ $(document).ready(function() {
 
     $("#congratsModal").modal("show");
   }
+   $("#congratsModal .close").click(function() {
+    $("#congratsModal").modal("hide");
+  });
 });
 
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~ Contact Form ~~~~~~~~~~~~~~~~~~~~~~~~~~~
