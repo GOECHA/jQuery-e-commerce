@@ -13789,6 +13789,11 @@ p {
   .delete-item {
     font-size: 15px;
   }
+  .increase-itm-btn,
+  .decrease-itm-btn {
+    font-size: 15px;
+    background: transparent !important;
+  }
   .dropdown-toggle {
     height: 30px;
     width: 40px;

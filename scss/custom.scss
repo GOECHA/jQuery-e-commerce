@@ -75,11 +75,9 @@ body,
   opacity: 0.5;
 }
 
-
-
 // ~~~~~~~~~~~~~~~~~~~~~~ Navigation ~~~~~~~~~~~~~~~~~~~~~~
 
-.navbar-toggler{
+.navbar-toggler {
   margin: 4% !important;
 }
 
@@ -157,10 +155,9 @@ p {
 }
 
 .hero-title,
-.hero-sub-title{
+.hero-sub-title {
   text-shadow: 3px 3px 5px rgba(0, 0, 0, 0.5);
 }
-
 
 .card-title-wrapper {
   height: 40px;
@@ -211,7 +208,7 @@ p {
     font-size: 10px;
   }
 
-  .nav-link{
+  .nav-link {
     margin-left: 2px;
   }
 
@@ -237,6 +234,13 @@ p {
     font-size: 15px;
   }
 
+  .increase-itm-btn,
+  .decrease-itm-btn {
+    font-size: 13px;
+    background-color: transparent !important;
+    border: none;
+  }
+
   .dropdown-toggle {
     height: 30px;
     width: 40px;
@@ -245,5 +249,6 @@ p {
 
   .table {
     margin-bottom: 2px !important;
+    width: auto;
   }
 }
