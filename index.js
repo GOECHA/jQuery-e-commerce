@@ -217,16 +217,21 @@ console.log({productPrice})
               <button
                 class="btn btn-secondary dropdown-toggle"
                 type="button"
+                data-product-id="${item.id}"
                 id="dropdownMenuButton1"
                 data-bs-toggle="dropdown"
                 aria-expanded="false"
               >
                 ${itemQty}
               </button>
-              <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton${index}">
+              <ul class="dropdown-menu" data-product-id="${item.id}" aria-labelledby="dropdownMenuButton${index}">
                 ${quantityList}
               </ul>
             </div>
+          </td>
+          <td>
+          <button class="increase-itm-btn" id="increaseItmBtn" data-product-id="${item.id}">⬆</button>
+          <button class="decrease-itm-btn" id="decreaseItmBtn" data-product-id="${item.id}">⬇</button>
           </td>
           <td>
             <a class="delete-item text-center d-flex justify-content-center align-items-center" href="#" id="deleteItemButton${index}" data-index="${index}">🅇</a> 
@@ -242,8 +247,6 @@ console.log({productPrice})
         const selectedProductId = $(this).data("product-id");
         const selectedProductPrice = $(this).data("product-price");
       
-        console.log('selectedProductId', selectedProductId);
-        console.log('selectedProductPrice', selectedProductPrice);
       
         const selectedItemQty = parseFloat($(this).text()) || 0;
       
@@ -284,6 +287,81 @@ console.log({productPrice})
 
     cartItemsContainerTotalPrice.append(cartTotalPriceItemHtml);
 
+// ~~~~~~~~~~~~~~~~~~~~~~~~~~~ Increase || Decrease Cart Items ~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+function increaseQuantity(productId) {
+  // Find the dropdown menu associated with the product ID
+  var dropdownMenu = $(`[data-product-id="${productId}"]`).find(".dropdown-menu");
+console.log('dropdownMenu', dropdownMenu)
+  // Get the current selected quantity from the dropdown
+  var selectedQuantity = parseFloat(dropdownMenu.siblings(".dropdown-toggle").text()) || 0;
+
+  // Increase the quantity by 1
+  var newQuantity = selectedQuantity + 1;
+
+  // Update the dropdown toggle text with the new quantity
+  dropdownMenu.siblings(".dropdown-toggle").text(newQuantity);
+
+  // Find the selected product from the cartItems array
+  var selectedProduct = cartItems.find((item) => item.id === productId);
+
+  // Update the quantity and total price of the selected product
+  if (selectedProduct && selectedProduct.price) {
+    selectedProduct.quantity = newQuantity;
+    selectedProduct.totalPrice = (newQuantity * selectedProduct.price).toFixed(2);
+  }
+
+  // Update the total price cell of the corresponding row
+  var rowIndex = dropdownMenu.closest("tr").index();
+  var newTotalPrice = (selectedProduct.price * newQuantity).toFixed(2);
+  $("#totalQtyPrice" + rowIndex).text("$" + newTotalPrice);
+
+  // Store the updated quantity in localStorage
+  localStorage.setItem("selectedQuantity", newQuantity.toString());
+}
+    
+function decreaseQuantity(productId) {
+  // Find the dropdown menu associated with the product ID
+  var dropdownMenu = $(`[data-product-id="${productId}"]`).find(".dropdown-menu");
+console.log('productId: ' + productId)
+  // Get the current selected quantity from the dropdown
+  var selectedQuantity = parseFloat(dropdownMenu.siblings(".dropdown-toggle").text()) || 0;
+
+  // Decrease the quantity by 1, ensuring it doesn't go below 0
+  var newQuantity = Math.max(selectedQuantity - 1, 0);
+
+  // Update the dropdown toggle text with the new quantity
+  dropdownMenu.siblings(".dropdown-toggle").text(newQuantity);
+
+  // Find the selected product from the cartItems array
+  var selectedProduct = cartItems.find((item) => item.id === productId);
+
+  // Update the quantity and total price of the selected product
+  if (selectedProduct && selectedProduct.price) {
+    selectedProduct.quantity = newQuantity;
+    selectedProduct.totalPrice = (newQuantity * selectedProduct.price).toFixed(2);
+
+    // Update the total price cell of the corresponding row
+    var rowIndex = dropdownMenu.closest("tr").index();
+    var newTotalPrice = (selectedProduct.price * newQuantity).toFixed(2);
+    $("#totalQtyPrice" + rowIndex).text("$" + newTotalPrice);
+
+    // Store the updated quantity in localStorage
+    localStorage.setItem("selectedQuantity", newQuantity.toString());
+  }
+}
+
+
+$(document).on("click", ".increase-itm-btn", function() {
+  var productId = $(this).data("data-product-id");
+  increaseQuantity(productId);
+});
+
+
+$(document).on("click", ".decrease-itm-btn", function() {
+  var productId = $(this).data("data-product-id");
+  decreaseQuantity(productId);
+});
 
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~ Delete Cart Items ~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -340,18 +418,9 @@ $(document).ready(function () {
     if (!$("#name").val() || !$("#email").val() || !$("#message").val()) {
       alert("Please fill out all the fields.");
     } else {
-      // Clear the form fields
       $("#name").val("");
       $("#email").val("");
       $("#message").val("");
-
-      // Redirect to the #submitForm section
-      $("html, body").animate(
-        {
-          scrollTop: $("#submitForm").offset().top,
-        },
-        800
-      );
     }
   });
 });
