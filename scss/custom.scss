@@ -8,11 +8,8 @@
 @import "../node_modules/bootstrap/scss/card";
 @import "../node_modules/bootstrap/scss/modal";
 
-
-
-
-$primary-color: #74EBD5;
-$secondary-color: #9FACE6;
+$primary-color: #74ebd5;
+$secondary-color: #9face6;
 
 body,
 .navbar {
@@ -20,22 +17,22 @@ body,
   background-image: linear-gradient(90deg, $primary-color 0%, $secondary-color 100%);
   font: $white;
 }
-.nav-logo2{
+.nav-logo2 {
   mix-blend-mode: multiply;
   background: transparent !important;
 }
-  // ~~~~~~~~~~~~~~~~~~~~~~ Product Grid ~~~~~~~~~~~~~~~~~~~~~~  
-  .products-container {
-    @include make-container();
-    // width: 800px;
-  }
-  
-  .product-row {
-    @include make-row();
-  }
-  
-  .card {
-    @include make-col-ready();
+// ~~~~~~~~~~~~~~~~~~~~~~ Product Grid ~~~~~~~~~~~~~~~~~~~~~~
+.products-container {
+  @include make-container();
+  // width: 800px;
+}
+
+.product-row {
+  @include make-row();
+}
+
+.card {
+  @include make-col-ready();
   width: 100%;
 
   @include media-breakpoint-up(xs) {
@@ -54,20 +51,16 @@ body,
     margin: 66px;
   }
 
-    margin: 10px;
-    padding: 0 !important;
-  
-  }
-  .card-body{
-    padding:.1rem;
-  }
+  margin: 10px;
+  padding: 0 !important;
+}
+.card-body {
+  padding: 0.1rem;
+}
 
-
-
-
-// ~~~~~~~~~~~~~~~~~~~~~~ Images ~~~~~~~~~~~~~~~~~~~~~~  
+// ~~~~~~~~~~~~~~~~~~~~~~ Images ~~~~~~~~~~~~~~~~~~~~~~
 .nav-logo,
-.nav-logo2{
+.nav-logo2 {
   mix-blend-mode: multiply;
   background: transparent !important;
 }
@@ -77,27 +70,30 @@ body,
   mix-blend-mode: multiply;
 }
 
-
-.submit-image{
+.submit-image {
   opacity: 0.5;
 }
 
-// ~~~~~~~~~~~~~~~~~~~~~~ Navigation ~~~~~~~~~~~~~~~~~~~~~~  
+// ~~~~~~~~~~~~~~~~~~~~~~ Navigation ~~~~~~~~~~~~~~~~~~~~~~
+
+.navbar-toggler{
+  margin: 4% !important;
+}
 
 .btn-cart {
-font-size: 0.7rem;
-padding: 0;
+  font-size: 0.7rem;
+  padding: 0;
 }
 
 .btn-grad,
-.btn-grad2{
-  background-image: linear-gradient(to right, #4CB8C4 0%, #3CD3AD 51%, #4CB8C4 100%);
+.btn-grad2 {
+  background-image: linear-gradient(to right, #4cb8c4 0%, #3cd3ad 51%, #4cb8c4 100%);
   background-position: left center;
   background-size: 200% auto;
   color: #fff;
   text-align: center;
   text-transform: uppercase;
-  transition: .5s;
+  transition: 0.5s;
   margin: 10px;
   padding: 15px 45px;
   box-shadow: 0 0 20px #eee;
@@ -106,7 +102,7 @@ padding: 0;
   text-decoration: none;
 }
 
-.btn-grad2{
+.btn-grad2 {
   padding: 3px;
   width: 95%;
   margin-top: 5px;
@@ -125,54 +121,57 @@ padding: 0;
   background-position: right center;
 }
 
-
-
 .btn-sort-name,
-.btn-sort-stars{
+.btn-sort-stars {
   width: 100px;
   height: 37px;
   margin-right: 0px;
-  font-size: .5rem;
+  font-size: 0.5rem;
   margin-top: 0;
   margin-bottom: 0;
   padding: 0;
 }
 
-
-.btn-purchase{
-  font-size: .8rem;
+.btn-purchase {
+  font-size: 0.8rem;
 }
 
-.delete-item{
+.delete-item {
   color: $red;
   height: 12px;
-  width: 5px;
+  font-size: 25px;
 }
-// ~~~~~~~~~~~~~~~~~~~~~~ Products ~~~~~~~~~~~~~~~~~~~~~~  
+// ~~~~~~~~~~~~~~~~~~~~~~ Products ~~~~~~~~~~~~~~~~~~~~~~
 
-  
-.card{
-  background-color: rgba(255, 255, 255, 0.5)
+.card {
+  background-color: rgba(255, 255, 255, 0.5);
 }
 
-// ~~~~~~~~~~~~~~~~~~~~~~ Text ~~~~~~~~~~~~~~~~~~~~~~  
+// ~~~~~~~~~~~~~~~~~~~~~~ Text ~~~~~~~~~~~~~~~~~~~~~~
 
 p {
   margin: 1px;
 }
+
+.hero-title,
+.hero-sub-title{
+  text-shadow: 3px 3px 5px rgba(0, 0, 0, 0.5);
+}
+
+
 .card-title-wrapper {
   height: 40px;
   -webkit-mask-image: linear-gradient(180deg, #000 80%, transparent);
-  margin-top: .1rem;
+  margin-top: 0.1rem;
 }
 
 .card-title {
   font-size: 0.6rem;
   padding-top: 5px;
-  padding-bottom: .1rem;
+  padding-bottom: 0.1rem;
   font-weight: 900;
 }
-.card-description-wrapper{
+.card-description-wrapper {
   max-width: 90%;
   height: 60px;
   -webkit-mask-image: linear-gradient(180deg, #000 60%, transparent);
@@ -184,14 +183,13 @@ p {
 
 .p-description {
   width: 90%;
-  margin:0;
+  margin: 0;
 }
 
 .price {
   font-size: 0.7rem;
   height: 20px;
   font-weight: 700;
-  
 }
 
 .card-footer {
@@ -201,28 +199,48 @@ p {
 /* ~~~~~~~~~~~medium device~~~~~~~~~~~~~~~ */
 
 @media screen and (max-width: 768px) {
- 
 }
-
 
 /* ~~~~~~~~~~~mobile device~~~~~~~~~~~~~~~ */
 
 @media screen and (max-width: 576px) {
-  .pg-title-wrapper{
+  .hero-sub-title {
+    font-size: 10px;
+  }
+
+  .nav-link{
+    margin-left: 2px;
+  }
+  
+  .pg-title-wrapper {
     display: flex;
     flex-direction: column;
     text-align: center !important;
-
   }
 
   .input-group {
     justify-content: center !important;
   }
 
-  .cart-items-container{
+  .cart-items-container,
+  .table {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    font-size: 0.5rem;
+  }
+  .delete-item {
+    font-size: 15px;
+  }
+
+  .dropdown-toggle {
+    height: 30px;
+    width: 40px;
+    font-size: 10px;
+  }
+
+  .table {
+    margin-bottom: 2px !important;
   }
 }
