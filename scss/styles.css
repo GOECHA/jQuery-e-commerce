@@ -13639,7 +13639,8 @@ body,
   mix-blend-mode: multiply;
 }
 
-.submit-image {
+.submit-image,
+.empty-cart-image {
   opacity: 0.5;
 }
 

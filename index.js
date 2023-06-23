@@ -31,6 +31,24 @@ $(document).ready(function () {
   $("#home").show();
 });
 
+
+
+// ~~~~~~~~~~~~~~~~~~~~~~~~~~~ Helper Functions ~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+function roundToTwoDecimalPlaces(number) {
+  return number.toFixed(2);
+}
+
+function totalItemPrice(qty, price) {
+  return qty * price;
+}
+
+function subtractItemPrice(totalPrice, qty, price) {
+  return totalPrice - totalItemPrice(qty, price);
+}
+
+
+
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ Display Products ~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 function displayProducts(data) {
@@ -120,7 +138,6 @@ $("#btnRating").click(function () {
         parseFloat($(this).find("#cardRating").text().substring(1)) === rating
       );
     });
-    console.log("card", card);
     productContainer.append(card);
   });
 });
@@ -208,7 +225,7 @@ $(document).ready(function () {
        </div>
           </div>
           </td>
-          <td class="total-qty-price" id="totalQtyPrice"> $${itemPrice}</td>
+          <td class="total-qty-price" id="totalQtyPrice"> $${itemPrice.toFixed(2)}</td>
           <td>
           <a class="delete-item text-center d-flex justify-content-center align-items-center" href="#" id="deleteItemButton${index}" data-index="${index}">🅇</a> 
           </td>
@@ -261,11 +278,20 @@ $(document).ready(function () {
 
     cartItemsContainerTotalPrice.append(cartTotalPriceItemHtml);
 
+
+// ~~~~~~~~~~~~~~~~~~~~~~~~~~~ Delete Cart Items ~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+
     $(".delete-item").on("click", function (e) {
       e.preventDefault();
       var container = $("#container");
-      var goShoppingMsg = `<h2 class="text-center pg-title-wrapper p-4 text-overlay position-absolute top-50 start-50 translate-middle text-center text-white">
-      As you set forth on your shopping adventure, your cart eagerly awaits its first treasure to be added.</h2>
+      var goShoppingMsg = ` <div class="d-flex justify-content-center align-items-center empty-cart-container position-relative top-0 start-0 end-0 bottom-0">
+      <img
+        src="./assets/seabubble.png"
+        alt="seabubble Image"
+        class="img-fluid empty-cart-image"
+      /><h2 class="text-center pg-title-wrapper p-4 text-overlay position-absolute top-50 start-50 translate-middle text-center text-white mt-5">
+      As you set forth on your shopping adventure, your cart eagerly awaits its first treasure to be added.</h2></div>
       `;
 
       var index = $(this).data("index");
@@ -298,29 +324,9 @@ $(document).ready(function() {
     $("#congratsModal").modal("show");
   }
 });
+ﬁ
 
-$(document).ready(function () {
-  $("#congratsModal").on("shown.bs.modal", function () {
-    $("#btnPurchase").trigger("focus");
-  });
-});
-
-
-// ~~~~~~~~~~~~~~~~~~~~~~~~~~~ Helper Functions ~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-function roundToTwoDecimalPlaces(number) {
-  return number.toFixed(2);
-}
-
-function totalItemPrice(qty, price) {
-  return qty * price;
-}
-
-function subtractItemPrice(totalPrice, qty, price) {
-  return totalPrice - totalItemPrice(qty, price);
-}
-
-// ~~~~~~~~~~~~~~~~~~~~~~~~~~~ Error Handling ~~~~~~~~~~~~~~~~~~~~~~~~~~~
+// ~~~~~~~~~~~~~~~~~~~~~~~~~~~ Contact Form ~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 $(document).ready(function () {
   $("#contactForm").submit(function (event) {
