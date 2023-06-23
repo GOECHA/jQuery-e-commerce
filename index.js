@@ -1,6 +1,5 @@
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~ Navigation ~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-// const { data } = require("jquery");
 
 $(document).ready(function () {
   $(".navbar-brand").click(function (e) {
@@ -212,6 +211,7 @@ console.log({productPrice})
           <th scope="row">${index + 1}</th>
           <td>${item.name}</td>
           <td class="single-itm-price" data-product-id="${item.id}" data-product-price="${roundedNum}">$${roundedNum}</td>
+          <td class="total-qty-price" id="totalQtyPrice${index}">$${itemPrice.toFixed(2)}</td>
           <td>         
             <div class="dropdown">
               <button
@@ -228,11 +228,15 @@ console.log({productPrice})
               </ul>
             </div>
           </td>
-          <td class="total-qty-price" id="totalQtyPrice${index}">$${itemPrice.toFixed(2)}</td>
           <td>
             <a class="delete-item text-center d-flex justify-content-center align-items-center" href="#" id="deleteItemButton${index}" data-index="${index}">🅇</a> 
           </td>
         </tr>`;
+
+
+// ~~~~~~~~~~~~~~~~~~~~~~~~~~~ Update Price with Dropdown ~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+
       
       $(document).on("click", ".dropdown-item", function () {
         const selectedProductId = $(this).data("product-id");
@@ -265,15 +269,8 @@ console.log({productPrice})
       
 
 
-
-// ~~~~~~~~~~~~~~~~~~~~~~~~~~~ TEST ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-
-
-
-
       cartItemsContainer.append(cartItemHtml);
-      // ("#totalQtyPrice").append(itemPrice);
+  
     });
 
     cartItemsContainerTotalPrice.empty();
