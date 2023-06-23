@@ -291,83 +291,71 @@ console.log({productPrice})
 
 
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~ Increase || Decrease Cart Items ~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
 function increaseQuantity(productId) {
-  // Find the dropdown menu associated with the product ID
-  var dropdownMenu = $(`[data-product-id="${productId}"]`).find(".dropdown-menu");
-console.log('dropdownMenu', dropdownMenu)
-  // Get the current selected quantity from the dropdown
-  var selectedQuantity = parseFloat(dropdownMenu.siblings(".dropdown-toggle").text()) || 0;
+  var cartItems = JSON.parse(localStorage.getItem("cartItems")) || [];
+  var cartItem = cartItems.find(function (item) {
+    return item.id === productId;
+  });
 
-  // Increase the quantity by 1
-  var newQuantity = selectedQuantity + 1;
-
-  // Update the dropdown toggle text with the new quantity
-  dropdownMenu.siblings(".dropdown-toggle").text(newQuantity);
-
-  // Find the selected product from the cartItems array
-  var selectedProduct = cartItems.find((item) => item.id === productId);
-
-  // Update the quantity and total price of the selected product
-  if (selectedProduct && selectedProduct.price) {
-    selectedProduct.quantity = newQuantity;
-    selectedProduct.totalPrice = (newQuantity * selectedProduct.price).toFixed(2);
+  if (cartItem) {
+    cartItem.quantity+=1;
+    cartItem.totalPrice = (cartItem.quantity * cartItem.price).toFixed(2);
+    updateCartItem(cartItem);
   }
-
-  // Update the total price cell of the corresponding row
-  var rowIndex = dropdownMenu.closest("tr").index();
-  var newTotalPrice = (selectedProduct.price * newQuantity).toFixed(2);
-  $("#totalQtyPrice" + rowIndex).text("$" + newTotalPrice);
-
-  // Store the updated quantity in localStorage
-  localStorage.setItem("selectedQuantity", newQuantity.toString());
 }
-    
+
 function decreaseQuantity(productId) {
-  // Find the dropdown menu associated with the product ID
-  var dropdownMenu = $(`[data-product-id="${productId}"] dropdown-menu`);
-console.log('productId: ' + productId)
-  // Get the current selected quantity from the dropdown
-  var selectedQuantity = parseFloat(dropdownMenu.siblings(".dropdown-toggle").text()) || 0;
+  var cartItems = JSON.parse(localStorage.getItem("cartItems")) || [];
+  var cartItem = cartItems.find(function (item) {
+    return item.id === productId;
+  });
 
-  // Decrease the quantity by 1, ensuring it doesn't go below 0
-  var newQuantity = Math.max(selectedQuantity - 1, 0);
-
-  // Update the dropdown toggle text with the new quantity
-  dropdownMenu.siblings(".dropdown-toggle").text(newQuantity);
-
-  // Find the selected product from the cartItems array
-  var selectedProduct = cartItems.find((item) => item.id === productId);
-
-  // Update the quantity and total price of the selected product
-  if (selectedProduct && selectedProduct.price) {
-    selectedProduct.quantity = newQuantity;
-    selectedProduct.totalPrice = (newQuantity * selectedProduct.price).toFixed(2);
-
-    // Update the total price cell of the corresponding row
-    var rowIndex = dropdownMenu.closest("tr").index();
-    var newTotalPrice = (selectedProduct.price * newQuantity).toFixed(2);
-    $("#totalQtyPrice" + rowIndex).text("$" + newTotalPrice);
-
-    // Store the updated quantity in localStorage
-    localStorage.setItem("selectedQuantity", newQuantity.toString());
+  if (cartItem) {
+    if (cartItem.quantity > 1) {
+      cartItem.quantity-=1;
+      cartItem.totalPrice = (cartItem.quantity * cartItem.price).toFixed(2);
+      updateCartItem(cartItem);
+    } else {
+      removeCartItem(productId);
+    }
   }
 }
 
 
-$(document).on("click", ".increase-itm-btn", function() {
+function updateCartItem(cartItem) {
+  var cartItems = JSON.parse(localStorage.getItem("cartItems")) || [];
+  var existingCartItemIndex = cartItems.findIndex(function (item) {
+    return item.id === cartItem.id;
+  });
+
+  if (existingCartItemIndex !== -1) {
+    cartItems[existingCartItemIndex] = cartItem;
+    localStorage.setItem("cartItems", JSON.stringify(cartItems));
+    displayCartItems();
+  }
+}
+
+function removeCartItem(productId) {
+  var cartItems = JSON.parse(localStorage.getItem("cartItems")) || [];
+  var updatedCartItems = cartItems.filter(function (item) {
+    return item.id !== productId;
+  });
+
+  localStorage.setItem("cartItems", JSON.stringify(updatedCartItems));
+  displayCartItems();
+}
+
+$(document).on("click", ".increase-itm-btn", function () {
   var productId = $(this).data("product-id");
-  console.log('productId 357', productId)
   increaseQuantity(productId);
 });
 
-
-$(document).on("click", ".decrease-itm-btn", function() {
+$(document).on("click", ".decrease-itm-btn", function () {
   var productId = $(this).data("product-id");
-  console.log('productId 364', productId)
-
   decreaseQuantity(productId);
 });
+
+
 
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~ Delete Cart Items ~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
