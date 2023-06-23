@@ -1,5 +1,7 @@
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~ Navigation ~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
+// const { data } = require("jquery");
+
 $(document).ready(function () {
   $(".navbar-brand").click(function (e) {
     e.preventDefault();
@@ -151,7 +153,7 @@ $(document).ready(function () {
     var productId = $(this).data("product-id");
     var productName = $(this).data("product-name");
     var productPrice = $(this).data("product-price");
-
+console.log({productPrice})
     var cartItem = {
       id: productId,
       name: productName,
@@ -192,76 +194,83 @@ $(document).ready(function () {
       let itemPrice = totalItemPrice(item.quantity, roundedNum);
       var itemQty = item.quantity;
 
+
       function qtyNums(qty) {
         const numbers = Array.from({ length: qty }, (_, index) => index + 1);
         const listItems = numbers.map(
           (number) =>
-            `<li className="dropNum"><a class="dropdown-item" id="${number}" href="#">${number}</a></li>`
+            `<a class="dropdown-item" data-product-id="${item.id}" data-product-price="${roundedNum}" href="#">${number}</a>`
         );
+        console.log('item.id', item.id)
         return listItems;
       }
-
+      
       const quantityList = qtyNums(itemQty);
-      console.log("quantityList", quantityList[0]);
+      console.log("quantityList", quantityList);
       var cartItemHtml = `
         <tr>
           <th scope="row">${index + 1}</th>
           <td>${item.name}</td>
-          <td class="single-itm-price" id="singleItmPrice">$${roundedNum}</td>
+          <td class="single-itm-price" data-product-id="${item.id}" data-product-price="${roundedNum}">$${roundedNum}</td>
           <td>         
-          <div class="dropdown">
-          <button
-             class="btn btn-secondary dropdown-toggle"
-             type="button"
-             id="dropdownMenuButton1"
-             data-bs-toggle="dropdown"
-             aria-expanded="false"
-          >
-          ${itemQty}
-          </button>
-          <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-         ${quantityList}
-          </ul>
-       </div>
-          </div>
+            <div class="dropdown">
+              <button
+                class="btn btn-secondary dropdown-toggle"
+                type="button"
+                id="dropdownMenuButton1"
+                data-bs-toggle="dropdown"
+                aria-expanded="false"
+              >
+                ${itemQty}
+              </button>
+              <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton${index}">
+                ${quantityList}
+              </ul>
+            </div>
           </td>
-          <td class="total-qty-price" id="totalQtyPrice"> $${itemPrice.toFixed(2)}</td>
+          <td class="total-qty-price" id="totalQtyPrice${index}">$${itemPrice.toFixed(2)}</td>
           <td>
-          <a class="delete-item text-center d-flex justify-content-center align-items-center" href="#" id="deleteItemButton${index}" data-index="${index}">🅇</a> 
+            <a class="delete-item text-center d-flex justify-content-center align-items-center" href="#" id="deleteItemButton${index}" data-index="${index}">🅇</a> 
           </td>
         </tr>`;
-
+      
       $(document).on("click", ".dropdown-item", function () {
-        var idString = $(this).attr("id");
+        const selectedProductId = $(this).data("product-id");
+        const selectedProductPrice = $(this).data("product-price");
+      
+        console.log('selectedProductId', selectedProductId);
+        console.log('selectedProductPrice', selectedProductPrice);
+      
+        const selectedItemQty = parseFloat($(this).text()) || 0;
+      
+        let selectedCartItem = cartItems.find((item) => item.id === selectedProductId);
+      
+        if (selectedCartItem) {
+          selectedCartItem.quantity = selectedItemQty;
+          selectedCartItem.totalPrice = (selectedItemQty * selectedCartItem.price).toFixed(2);
+        }
+      
+        var dropdownMenu = $(this).closest(".dropdown").find(".dropdown-toggle");
+        dropdownMenu.text(selectedItemQty);
+      
+        var rowIndex = $(this).closest("tr").index(); 
+        var newTotalPrice = (selectedCartItem.price * selectedItemQty).toFixed(2);
+        $("#totalQtyPrice").text(newTotalPrice);
+      
+        $("#totalQtyPrice" + rowIndex).text("$" + newTotalPrice); 
 
-        var id = parseInt(idString, 10);
-        var dropdownMenu = $(this)
-          .closest(".dropdown")
-          .find(".dropdown-toggle");
-        dropdownMenu.text(id);
 
-        $("#totalQtyPrice").text(itemPrice);
-        localStorage.setItem("selectedQuantity", itemQty);
+        localStorage.setItem("selectedQuantity", selectedItemQty.toString());
       });
+      
 
-      // $("#dropdownMenuButton1").on("change", function() {
-      //   var selectedQuantity = parseInt(
-      //     localStorage.getItem("selectedQuantity"),10);
 
-      //   if (!isNaN(selectedQuantity)) {
-      //     var dropdownMenu = $(".drop-down-tem");
-      //     dropdownMenu.text(selectedQuantity);
-      //     var updateItemPrice = selectedQuantity * itemPrice
-      //     console.log('updateItemPrice', updateItemPrice)
-      //    // Replace `calculateTotalPrice` with your actual calculation logic
-      //     $("#totalQtyPrice").text(updateItemPrice);
-      //   }
-      // var qty = $(this).val();
-      // var price = qty * itemPrice;
-      // console.log('price185', price)
-      // $(".total-qty-price").text(price);
 
-      // });
+// ~~~~~~~~~~~~~~~~~~~~~~~~~~~ TEST ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+
+
+
 
       cartItemsContainer.append(cartItemHtml);
       // ("#totalQtyPrice").append(itemPrice);
@@ -324,7 +333,6 @@ $(document).ready(function() {
     $("#congratsModal").modal("show");
   }
 });
-ﬁ
 
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~ Contact Form ~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
