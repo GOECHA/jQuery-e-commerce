@@ -1,14 +1,6 @@
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~ Navigation ~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 
-// $(function () {
-//   $(".navbar-brand").click(function (e) {
-//     e.preventDefault();
-
-//     $(".page").hide();
-//     $("#home").show();
-//   });
-// });
 
 $(function () {
   $(document).on("click", ".navbar-brand", function (e) {
@@ -413,7 +405,7 @@ $(function() {
 
     $("#congratsModal").modal("show");
   }
-  $(document).on("#congratsModal .close", function() {
+  $(document).on("click", "#congratsModal .close", function() {
     $("#congratsModal").modal("hide");
   });
 });
