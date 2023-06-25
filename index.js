@@ -217,7 +217,7 @@ console.log({productPrice})
               <button
                 class="btn btn-secondary dropdown-toggle"
                 type="button"
-                data-product-id="${item.id}"
+               
                 id="dropdownMenuButton1"
                 data-bs-toggle="dropdown"
                 aria-expanded="false"
@@ -345,12 +345,12 @@ function removeCartItem(productId) {
   displayCartItems();
 }
 
-$(document).on("click", ".increase-itm-btn", function () {
+$(document).off("click", ".increase-itm-btn").on("click", ".increase-itm-btn", function() {
   var productId = $(this).data("product-id");
   increaseQuantity(productId);
 });
 
-$(document).on("click", ".decrease-itm-btn", function () {
+$(document).off("click", ".decrease-itm-btn").on("click", ".decrease-itm-btn", function() {
   var productId = $(this).data("product-id");
   decreaseQuantity(productId);
 });
