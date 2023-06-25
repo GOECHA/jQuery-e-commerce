@@ -13711,7 +13711,8 @@ body,
 }
 
 .empty-cart-explore-btn {
-  position: top sticky !important;
+  margin-top: -60%;
+  z-index: 1;
 }
 
 .increase-itm-btn,
@@ -13732,6 +13733,10 @@ p {
 .hero-sub-title,
 .cart-empty-msg {
   text-shadow: 3px 3px 5px rgba(0, 0, 0, 0.5);
+}
+
+.cart-empty-msg {
+  max-width: 70%;
 }
 
 .card-title-wrapper {
@@ -13803,6 +13808,9 @@ p {
   }
   .cart-empty-msg {
     font-size: medium;
+  }
+  .empty-cart-explore-btn {
+    margin-top: -30%;
   }
   .delete-item {
     font-size: 15px;
