@@ -1,8 +1,17 @@
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~ Navigation ~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 
+// $(function () {
+//   $(".navbar-brand").click(function (e) {
+//     e.preventDefault();
+
+//     $(".page").hide();
+//     $("#home").show();
+//   });
+// });
+
 $(function () {
-  $(".navbar-brand").click(function (e) {
+  $(document).on("click", ".navbar-brand", function (e) {
     e.preventDefault();
 
     $(".page").hide();
@@ -11,7 +20,7 @@ $(function () {
 });
 
 $(function () {
-  $(".btn-primary").click(function (e) {
+  $(document).on("click", ".btn-primary", function (e) {
     e.preventDefault();
 
     $(".page").hide();
@@ -152,7 +161,7 @@ $(function () {
     var productId = $(this).data("product-id");
     var productName = $(this).data("product-name");
     var productPrice = $(this).data("product-price");
-console.log({productPrice})
+
     var cartItem = {
       id: productId,
       name: productName,
