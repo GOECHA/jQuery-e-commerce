@@ -45,6 +45,17 @@ function subtractItemPrice(totalPrice, qty, price) {
   return totalPrice - totalItemPrice(qty, price);
 }
 
+$(function() {
+  $(".lazy").Lazy({
+    scrollDirection: 'vertical',
+    effect: 'fadeIn',
+    visibleOnly: true,
+    onError: function(element) {
+        console.log('error loading ' + element.data('src'));
+    }
+});
+});
+
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ Display Products ~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 function displayProducts(data) {
@@ -54,7 +65,7 @@ function displayProducts(data) {
     var roundedNum = roundToTwoDecimalPlaces(product.price);
 
     var productHtml = `<div class="col card shadow p-3 mb-5 bg-white rounded" style="width: 13rem; height: 18rem; align-items: center">
-        <img src=${product.image} class="card-img-top object-fit-contain border rounded" alt=${product.title} style="width: 80%; height: 35%;">
+        <img src=${product.image} class="lazy card-img-top object-fit-contain border rounded" alt=${product.title} style="width: 80%; height: 35%;">
         <div class="card-body" style="width: 90%; height: 30%;">
           <div class="card-title-wrapper justify-content-center align-items-center">
             <p class="font-weight-bold card-title">${product.title}</p>
