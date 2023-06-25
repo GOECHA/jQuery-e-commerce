@@ -1,7 +1,7 @@
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~ Navigation ~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 
-$(document).ready(function () {
+$(function () {
   $(".navbar-brand").click(function (e) {
     e.preventDefault();
 
@@ -10,7 +10,7 @@ $(document).ready(function () {
   });
 });
 
-$(document).ready(function () {
+$(function () {
   $(".btn-primary").click(function (e) {
     e.preventDefault();
 
@@ -19,7 +19,7 @@ $(document).ready(function () {
   });
 });
 
-$(document).ready(function () {
+$(function () {
   $("a.nav-link").on("click", function (e) {
     e.preventDefault();
 
@@ -145,7 +145,7 @@ $("#btnRating").click(function () {
 
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~ Display Cart Items ~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-$(document).ready(function () {
+$(function () {
   $("#rowProduct").on("click", ".add-to-cart-btn", function (e) {
     e.preventDefault();
 
@@ -298,7 +298,7 @@ function increaseQuantity(productId) {
   });
 
   if (cartItem) {
-    cartItem.quantity+=1;
+    cartItem.quantity++;
     cartItem.totalPrice = (cartItem.quantity * cartItem.price).toFixed(2);
     updateCartItem(cartItem);
   }
@@ -312,7 +312,7 @@ function decreaseQuantity(productId) {
 
   if (cartItem) {
     if (cartItem.quantity > 1) {
-      cartItem.quantity-=1;
+      cartItem.quantity--;
       cartItem.totalPrice = (cartItem.quantity * cartItem.price).toFixed(2);
       updateCartItem(cartItem);
     } else {
@@ -388,7 +388,7 @@ $(document).on("click", ".decrease-itm-btn", function () {
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~ Submit Cart Data ~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 
-$(document).ready(function() {
+$(function() {
   $("#btnPurchase").click(function(e) {
     e.preventDefault();
     purchaseItems();
@@ -408,7 +408,7 @@ $(document).ready(function() {
 
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~ Contact Form ~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-$(document).ready(function () {
+$(function () {
   $("#contactForm").submit(function (event) {
     event.preventDefault();
 
