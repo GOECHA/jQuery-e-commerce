@@ -13710,6 +13710,17 @@ body,
   font-size: 25px;
 }
 
+.empty-cart-btn-wrapper {
+  height: 100%;
+  width: 100%;
+}
+
+.increase-itm-btn,
+.decrease-itm-btn {
+  background-color: transparent !important;
+  border: none;
+}
+
 .card {
   background-color: rgba(255, 255, 255, 0.5);
 }
@@ -13719,7 +13730,8 @@ p {
 }
 
 .hero-title,
-.hero-sub-title {
+.hero-sub-title,
+.cart-empty-msg {
   text-shadow: 3px 3px 5px rgba(0, 0, 0, 0.5);
 }
 
@@ -13786,21 +13798,24 @@ p {
     align-items: center;
     font-size: 0.5rem;
   }
+  .table {
+    margin-bottom: 2px !important;
+    width: auto;
+  }
+  .cart-empty-msg {
+    font-size: medium;
+  }
   .delete-item {
     font-size: 15px;
   }
   .increase-itm-btn,
   .decrease-itm-btn {
-    font-size: 15px;
-    background: transparent !important;
+    font-size: 13px;
   }
   .dropdown-toggle {
     height: 30px;
     width: 40px;
     font-size: 10px;
-  }
-  .table {
-    margin-bottom: 2px !important;
   }
 }
 

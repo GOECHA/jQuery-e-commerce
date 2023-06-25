@@ -1,8 +1,17 @@
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~ Navigation ~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 
-$(document).ready(function () {
-  $(".navbar-brand").click(function (e) {
+// $(function () {
+//   $(".navbar-brand").click(function (e) {
+//     e.preventDefault();
+
+//     $(".page").hide();
+//     $("#home").show();
+//   });
+// });
+
+$(function () {
+  $(document).on("click", ".navbar-brand", function (e) {
     e.preventDefault();
 
     $(".page").hide();
@@ -10,8 +19,8 @@ $(document).ready(function () {
   });
 });
 
-$(document).ready(function () {
-  $(".btn-primary").click(function (e) {
+$(function () {
+  $(document).on("click", ".btn-primary", function (e) {
     e.preventDefault();
 
     $(".page").hide();
@@ -19,7 +28,7 @@ $(document).ready(function () {
   });
 });
 
-$(document).ready(function () {
+$(function () {
   $("a.nav-link").on("click", function (e) {
     e.preventDefault();
 
@@ -145,14 +154,14 @@ $("#btnRating").click(function () {
 
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~ Display Cart Items ~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-$(document).ready(function () {
+$(function () {
   $("#rowProduct").on("click", ".add-to-cart-btn", function (e) {
     e.preventDefault();
 
     var productId = $(this).data("product-id");
     var productName = $(this).data("product-name");
     var productPrice = $(this).data("product-price");
-console.log({productPrice})
+
     var cartItem = {
       id: productId,
       name: productName,
@@ -217,7 +226,7 @@ console.log({productPrice})
               <button
                 class="btn btn-secondary dropdown-toggle"
                 type="button"
-                data-product-id="${item.id}"
+               
                 id="dropdownMenuButton1"
                 data-bs-toggle="dropdown"
                 aria-expanded="false"
@@ -298,7 +307,7 @@ function increaseQuantity(productId) {
   });
 
   if (cartItem) {
-    cartItem.quantity+=1;
+    cartItem.quantity++;
     cartItem.totalPrice = (cartItem.quantity * cartItem.price).toFixed(2);
     updateCartItem(cartItem);
   }
@@ -312,7 +321,7 @@ function decreaseQuantity(productId) {
 
   if (cartItem) {
     if (cartItem.quantity > 1) {
-      cartItem.quantity-=1;
+      cartItem.quantity--;
       cartItem.totalPrice = (cartItem.quantity * cartItem.price).toFixed(2);
       updateCartItem(cartItem);
     } else {
@@ -345,12 +354,12 @@ function removeCartItem(productId) {
   displayCartItems();
 }
 
-$(document).on("click", ".increase-itm-btn", function () {
+$(document).off("click", ".increase-itm-btn").on("click", ".increase-itm-btn", function() {
   var productId = $(this).data("product-id");
   increaseQuantity(productId);
 });
 
-$(document).on("click", ".decrease-itm-btn", function () {
+$(document).off("click", ".decrease-itm-btn").on("click", ".decrease-itm-btn", function() {
   var productId = $(this).data("product-id");
   decreaseQuantity(productId);
 });
@@ -363,13 +372,15 @@ $(document).on("click", ".decrease-itm-btn", function () {
     $(".delete-item").on("click", function (e) {
       e.preventDefault();
       var container = $("#container");
-      var goShoppingMsg = ` <div class="d-flex justify-content-center align-items-center empty-cart-container position-relative top-0 start-0 end-0 bottom-0">
+      var goShoppingMsg = ` <div class="d-flex flex-column justify-content-center align-items-center empty-cart-container position-relative top-0 start-0 end-0 bottom-0">
       <img
         src="./assets/seabubble.png"
         alt="seabubble Image"
-        class="img-fluid empty-cart-image"
-      /><h2 class="text-center pg-title-wrapper p-4 text-overlay position-absolute top-50 start-50 translate-middle text-center text-white mt-5">
-      As you set forth on your shopping adventure, your cart eagerly awaits its first treasure to be added.</h2></div>
+        class="img-fluid shadow empty-cart-image"
+      /><h2 class="text-center pg-title-wrapper p-4 text-overlay position-absolute text-white cart-empty-msg">
+      As you set forth on your shopping adventure, your cart eagerly awaits its first treasure to be added.</h2>
+      <a class="nav-link btn btn-grad position-absolute empty-cart-explore-btn" href="#products"> Explore </a>
+      </div>
       `;
 
       var index = $(this).data("index");
@@ -388,11 +399,12 @@ $(document).on("click", ".decrease-itm-btn", function () {
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~ Submit Cart Data ~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 
-$(document).ready(function() {
-  $("#btnPurchase").click(function(e) {
+$(function() {
+  $(document).on("click", "#btnPurchase", function(e) {
     e.preventDefault();
     purchaseItems();
   });
+
 
   function purchaseItems() {
     localStorage.removeItem("cartItems");
@@ -401,15 +413,15 @@ $(document).ready(function() {
 
     $("#congratsModal").modal("show");
   }
-   $("#congratsModal .close").click(function() {
+  $(document).on("#congratsModal .close", function() {
     $("#congratsModal").modal("hide");
   });
 });
 
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~ Contact Form ~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-$(document).ready(function () {
-  $("#contactForm").submit(function (event) {
+$(function () {
+  $(document).on("#contactForm", function (event) {
     event.preventDefault();
 
     if (!$("#name").val() || !$("#email").val() || !$("#message").val()) {
