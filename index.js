@@ -1,7 +1,5 @@
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~ Navigation ~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-
-
 $(function () {
   $(document).on("click", ".navbar-brand", function (e) {
     e.preventDefault();
@@ -33,8 +31,6 @@ $(function () {
   $("#home").show();
 });
 
-
-
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~ Helper Functions ~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 function roundToTwoDecimalPlaces(number) {
@@ -48,8 +44,6 @@ function totalItemPrice(qty, price) {
 function subtractItemPrice(totalPrice, qty, price) {
   return totalPrice - totalItemPrice(qty, price);
 }
-
-
 
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ Display Products ~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -154,7 +148,6 @@ function toggleSubmitButtonVisibility(cartItems) {
   var seaBubbleImg = $("#seaBubbleImg");
   var emptyMsgh2 = $("#emptyMsgh2");
 
-  
   if (cartItems.length > 0) {
     cartExploreBtn.hide();
     goShoppingMsg.hide();
@@ -171,7 +164,6 @@ function toggleSubmitButtonVisibility(cartItems) {
     cartItmTable.hide();
   }
 }
-
 
 $(function () {
   $("#rowProduct").on("click", ".add-to-cart-btn", function (e) {
@@ -202,7 +194,7 @@ $(function () {
 
     localStorage.setItem("cartItems", JSON.stringify(existingCartItems));
     alert("Product added to cart!");
-        
+
     displayCartItems();
   });
 
@@ -210,7 +202,6 @@ $(function () {
 
   function displayCartItems() {
     var cartItems = JSON.parse(localStorage.getItem("cartItems")) || [];
-    console.log("cartItems", cartItems);
     var cartItemsContainer = $("#cartItemsContainer");
     var cartItemsContainerTotalPrice = $("#cartItemsContainerTotalPrice");
 
@@ -221,25 +212,27 @@ $(function () {
       let itemPrice = totalItemPrice(item.quantity, roundedNum);
       var itemQty = item.quantity;
 
-
       function qtyNums(qty) {
         const numbers = Array.from({ length: qty }, (_, index) => index + 1);
         const listItems = numbers.map(
           (number) =>
             `<a class="dropdown-item" data-product-id="${item.id}" data-product-price="${roundedNum}" href="#">${number}</a>`
         );
-    
+
         return listItems;
       }
-      
-      const quantityList = qtyNums(itemQty);
-      console.log("quantityList", quantityList);
+
+      const quantityList = qtyNums(itemQty)
       var cartItemHtml = `
         <tr>
           <th scope="row">${index + 1}</th>
           <td>${item.name}</td>
-          <td class="single-itm-price" data-product-id="${item.id}" data-product-price="${roundedNum}">$${roundedNum}</td>
-          <td class="total-qty-price" id="totalQtyPrice${index}">$${itemPrice.toFixed(2)}</td>
+          <td class="single-itm-price" data-product-id="${
+            item.id
+          }" data-product-price="${roundedNum}">$${roundedNum}</td>
+          <td class="total-qty-price" id="totalQtyPrice${index}">$${itemPrice.toFixed(
+        2
+      )}</td>
           <td>         
             <div class="dropdown">
               <button
@@ -252,54 +245,60 @@ $(function () {
               >
                 ${itemQty}
               </button>
-              <ul class="dropdown-menu" data-product-id="${item.id}" aria-labelledby="dropdownMenuButton${index}">
+              <ul class="dropdown-menu" data-product-id="${
+                item.id
+              }" aria-labelledby="dropdownMenuButton${index}">
                 ${quantityList}
               </ul>
             </div>
           </td>
           <td>
-          <button class="increase-itm-btn" id="increaseItmBtn" data-product-id="${item.id}">⬆</button>
-          <button class="decrease-itm-btn" id="decreaseItmBtn" data-product-id="${item.id}">⬇</button>
+          <button class="increase-itm-btn" id="increaseItmBtn" data-product-id="${
+            item.id
+          }">⬆</button>
+          <button class="decrease-itm-btn" id="decreaseItmBtn" data-product-id="${
+            item.id
+          }">⬇</button>
           </td>
           <td>
             <a class="delete-item text-center d-flex justify-content-center align-items-center" href="#" id="deleteItemButton${index}" data-index="${index}">🅇</a> 
           </td>
         </tr>`;
-        
 
+      // ~~~~~~~~~~~~~~~~~~~~~~~~~~~ Update Price with Dropdown ~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-// ~~~~~~~~~~~~~~~~~~~~~~~~~~~ Update Price with Dropdown ~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-
-      
       $(document).on("click", ".dropdown-item", function () {
         const selectedProductId = $(this).data("product-id");
         const selectedItemQty = parseFloat($(this).text()) || 0;
-      
-        let selectedCartItem = cartItems.find((item) => item.id === selectedProductId);
-      
+
+        let selectedCartItem = cartItems.find(
+          (item) => item.id === selectedProductId
+        );
+
         if (selectedCartItem) {
           selectedCartItem.quantity = selectedItemQty;
-          selectedCartItem.totalPrice = (selectedItemQty * selectedCartItem.price).toFixed(2);
+          selectedCartItem.totalPrice = (
+            selectedItemQty * selectedCartItem.price
+          ).toFixed(2);
         }
-      
-        var dropdownMenu = $(this).closest(".dropdown").find(".dropdown-toggle");
-        dropdownMenu.text(selectedItemQty);
-      
-        var rowIndex = $(this).closest("tr").index(); 
-        var newTotalPrice = (selectedCartItem.price * selectedItemQty).toFixed(2);
-        $("#totalQtyPrice").text(newTotalPrice);
-      
-        $("#totalQtyPrice" + rowIndex).text("$" + newTotalPrice); 
 
+        var dropdownMenu = $(this)
+          .closest(".dropdown")
+          .find(".dropdown-toggle");
+        dropdownMenu.text(selectedItemQty);
+
+        var rowIndex = $(this).closest("tr").index();
+        var newTotalPrice = (selectedCartItem.price * selectedItemQty).toFixed(
+          2
+        );
+        $("#totalQtyPrice").text(newTotalPrice);
+
+        $("#totalQtyPrice" + rowIndex).text("$" + newTotalPrice);
 
         localStorage.setItem("selectedQuantity", selectedItemQty.toString());
       });
-      
-
 
       cartItemsContainer.append(cartItemHtml);
-  
     });
 
     cartItemsContainerTotalPrice.empty();
@@ -313,117 +312,99 @@ $(function () {
 
     cartItemsContainerTotalPrice.append(cartTotalPriceItemHtml);
 
-    toggleSubmitButtonVisibility(cartItems)
-    handleDeleteItemClick(cartItems)
-  
+    toggleSubmitButtonVisibility(cartItems);
+    handleDeleteItemClick(cartItems);
 
+    // ~~~~~~~~~~~~~~~~~~~~~~~~~~~ Increase || Decrease Cart Items ~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-// ~~~~~~~~~~~~~~~~~~~~~~~~~~~ Increase || Decrease Cart Items ~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    function increaseQuantity(productId) {
+      var cartItem = cartItems.find(function (item) {
+        return item.id === productId;
+      });
 
-
-function increaseQuantity(productId) {
-  var cartItem = cartItems.find(function (item) {
-    return item.id === productId;
-  });
-
-  if (cartItem) {
-    cartItem.quantity++;
-    cartItem.totalPrice = (cartItem.quantity * cartItem.price).toFixed(2);
-    updateCartItem(cartItem);
-  }
-}
-
-function decreaseQuantity(productId) {
-  var cartItem = cartItems.find(function (item) {
-    return item.id === productId;
-  });
-
-  if (cartItem) {
-    if (cartItem.quantity > 1) {
-      cartItem.quantity--;
-      cartItem.totalPrice = (cartItem.quantity * cartItem.price).toFixed(2);
-      updateCartItem(cartItem);
-
-    } else {
-      removeCartItem(productId);
+      if (cartItem) {
+        cartItem.quantity++;
+        cartItem.totalPrice = (cartItem.quantity * cartItem.price).toFixed(2);
+        updateCartItem(cartItem);
+      }
     }
+
+    function decreaseQuantity(productId) {
+      var cartItem = cartItems.find(function (item) {
+        return item.id === productId;
+      });
+
+      if (cartItem) {
+        if (cartItem.quantity > 1) {
+          cartItem.quantity--;
+          cartItem.totalPrice = (cartItem.quantity * cartItem.price).toFixed(2);
+          updateCartItem(cartItem);
+        } else {
+          removeCartItem(productId);
+        }
+      }
+    }
+
+    function updateCartItem(cartItem) {
+      var existingCartItemIndex = cartItems.findIndex(function (item) {
+        return item.id === cartItem.id;
+      });
+
+      if (existingCartItemIndex !== -1) {
+        cartItems[existingCartItemIndex] = cartItem;
+        localStorage.setItem("cartItems", JSON.stringify(cartItems));
+        displayCartItems();
+      }
+    }
+
+    function removeCartItem(productId) {
+      var updatedCartItems = cartItems.filter(function (item) {
+        return item.id !== productId;
+      });
+
+      localStorage.setItem("cartItems", JSON.stringify(updatedCartItems));
+      displayCartItems();
+    }
+
+    $(document)
+      .off("click", ".increase-itm-btn")
+      .on("click", ".increase-itm-btn", function () {
+        var productId = $(this).data("product-id");
+        increaseQuantity(productId);
+      });
+
+    $(document)
+      .off("click", ".decrease-itm-btn")
+      .on("click", ".decrease-itm-btn", function () {
+        var productId = $(this).data("product-id");
+        decreaseQuantity(productId);
+        handleDeleteItemClick(cartItems);
+      });
   }
-}
-
-
-function updateCartItem(cartItem) {
-  var existingCartItemIndex = cartItems.findIndex(function (item) {
-    return item.id === cartItem.id;
-  });
-
-  if (existingCartItemIndex !== -1) {
-    cartItems[existingCartItemIndex] = cartItem;
-    localStorage.setItem("cartItems", JSON.stringify(cartItems));
-    displayCartItems();
-  }
-}
-
-function removeCartItem(productId) {
-  var updatedCartItems = cartItems.filter(function (item) {
-    return item.id !== productId;
-  });
-
-  localStorage.setItem("cartItems", JSON.stringify(updatedCartItems));
-  displayCartItems();
-}
-
-
-
-$(document).off("click", ".increase-itm-btn").on("click", ".increase-itm-btn", function() {
-  var productId = $(this).data("product-id");
-  increaseQuantity(productId);
-});
-
-$(document).off("click", ".decrease-itm-btn").on("click", ".decrease-itm-btn", function() {
-  var productId = $(this).data("product-id");
-  decreaseQuantity(productId);
-  handleDeleteItemClick(cartItems)
-});
-
-
-  }
-
-
 
   function handleDeleteItemClick(cartItems) {
     $(".delete-item").on("click", function (e) {
-  
       var index = $(this).data("index");
       cartItems.splice(index, 1);
       localStorage.setItem("cartItems", JSON.stringify(cartItems));
       $("#cartItemsContainerTotalPrice").empty();
       if (cartItems.length === 0) {
-        toggleSubmitButtonVisibility(cartItems)
-
+        toggleSubmitButtonVisibility(cartItems);
       } else {
         displayCartItems();
       }
     });
-  
   }
-
 });
-
-
-
-
-
 
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~ Submit Cart Data ~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-
-$(function() {
-  $(document).on("click", "#btnPurchase", function(e) {
+$(function () {
+  $(document).on("click", "#btnPurchase", function (e) {
     e.preventDefault();
     purchaseItems();
     toggleSubmitButtonVisibility(cartItems);
   });
-
 
   function purchaseItems() {
     localStorage.removeItem("cartItems");
@@ -432,11 +413,9 @@ $(function() {
 
     $("#congratsModal").modal("show");
   }
-  $(document).on("click", "#congratsModal .close", function() {
+  $(document).on("click", "#congratsModal .close", function () {
     $("#congratsModal").modal("hide");
   });
-  
-
 });
 
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~ Contact Form ~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -459,7 +438,7 @@ $(function () {
     $("#submitModal").modal("show");
   }
 
-  $(document).on("click", "#submitModal .close", function() {
+  $(document).on("click", "#submitModal .close", function () {
     $("#submitModal").modal("hide");
   });
 });

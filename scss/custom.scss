@@ -143,17 +143,16 @@ body,
   font-size: 25px;
 }
 
-.empty-cart-explore-btn{
+.empty-cart-explore-btn {
   margin-top: -70%;
   z-index: 1;
 }
 
-
 .increase-itm-btn,
-  .decrease-itm-btn {
-    background-color: transparent !important;
-    border: none;
-  }
+.decrease-itm-btn {
+  background-color: transparent !important;
+  border: none;
+}
 
 // ~~~~~~~~~~~~~~~~~~~~~~ Products ~~~~~~~~~~~~~~~~~~~~~~
 
@@ -250,11 +249,9 @@ p {
     width: auto;
   }
 
-  .cart-empty-msg{
-   font-size: medium;
-
+  .cart-empty-msg {
+    font-size: medium;
   }
-
 
   .delete-item {
     font-size: 15px;
@@ -270,6 +267,4 @@ p {
     width: 40px;
     font-size: 10px;
   }
-
- 
 }

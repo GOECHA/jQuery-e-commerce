@@ -3,7 +3,6 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
     <title>TealRay Boutique</title>
     <!-- Bootstrap CSS -->
     <link
@@ -11,8 +10,7 @@
       rel="stylesheet"
       integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM"
       crossorigin="anonymous"
-    />
-    
+    />    
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="sha512-6.4.0" crossorigin="anonymous" />
     <link rel="stylesheet" href="scss/styles.css" />
   </head>
@@ -65,18 +63,15 @@
           class="img-fluid"
         />
         <div
-          class="text-overlay position-absolute top-50 start-50 translate-middle text-center text-white"
-        >
+          class="text-overlay position-absolute top-50 start-50 translate-middle text-center text-white">
           <h1 class="display-4 hero-title">TealRay Boutique</h1>
           <h2 class="hero-sub-title" >Unlock the Best of Fashion and Innovation</h2>
           <a class="nav-link btn btn-grad" href="#products"> Explore </a>
         </div>
       </div>
     </section>
-
     <section class="page products" id="products">
       <div class="container">
-
       <div class="pg-title-wrapper p-4">
         <h2>Product Line</h2>
         <p>A Collection Blending Fashion, Functionality, and Fun</p>
@@ -90,14 +85,11 @@
         <button class="btn btn-grad btn-sort-name" id="btnSort">Sort A-Z</button>
         <button class="btn btn-grad btn-sort-stars" id="btnRating"> Sort by Rating</button>
       </div>
-
       </div>
       <div class="products-container text-center" id="productContainer">
         <div class="product-row justify-content-center" id="rowProduct"></div>
       </div>
     </section>
-
-    
     <section class="page contact" id="contact">
       <div class="container">
         <div class="pg-title-wrapper p-4">
@@ -130,13 +122,12 @@
               rows="3"
               placeholder="Enter your message"
             ></textarea>
-          </div>
-         
+          </div>  
           <div class="modal fade" id="submitModal" tabindex="-1" role="dialog" aria-labelledby="submitModalLabel" aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered" role="document">
               <div class="modal-content">
                 <div class="modal-header">
-                  <h5 class="modal-title" id="congratsModalLabel">Thank you for reaching out!!</h5>
+                  <h5 class="modal-title" id="congratsModalLabel">Thank you, for reaching out!</h5>
                 </div>
                 <div class="modal-body">
                   <p>An email confirmation has been sent to your email address, and we will contact you shortly.</p>
@@ -147,14 +138,9 @@
               </div>
             </div>
           </div>
-      
           <div class="d-flex justify-content-end">
-
             <button class="btn btn-grad btn-submit" id="btnSubmit" data-toggle="modal" data-target="#submitModal">Submit</button>
           </div>
-
-
-
         </form>
       </div>
     </section>
@@ -173,11 +159,9 @@
               <th scope="col">Qty</th>
               <th scope="col">+ -</th>
               <th>Delete All</th>
-
             </tr>
           </thead>
-          <tbody id="cartItemsContainer">
-          
+          <tbody id="cartItemsContainer">         
           </tbody>
           <thead>
             <tr>
@@ -186,13 +170,10 @@
               <td></td>
               <td id="cartItemsContainerTotalPrice"></td>
               <td></td>
-              <td></td>
-              
+              <td></td>              
             </tr>
-         
           </thead>
         </table>
-    
         <div class="modal fade" id="congratsModal" tabindex="-1" role="dialog" aria-labelledby="congratsModalLabel" aria-hidden="true">
           <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
@@ -208,7 +189,6 @@
             </div>
           </div>
         </div>
-    
         <div>
           <button class="btn btn-grad btn-purchase" id="btnPurchase" data-toggle="modal" data-target="#congratsModal">Purchase</button>
         </div>
@@ -220,15 +200,12 @@
             id="seaBubbleImg"
           />
           <h2 class="text-center pg-title-wrapper p-4 text-overlay position-absolute text-white cart-empty-msg" id="emptyMsgh2">
-          As you set forth on your shopping adventure, your cart eagerly awaits its first treasure to be added.</h2>
-          
-          
+          As you set forth on your shopping adventure, your cart eagerly awaits its first treasure to be added.
+          </h2>
           <a class="nav-link btn btn-grad empty-cart-explore-btn" href="#products" id="cartExploreBtn"> Explore </a>
         </div>
       </div>
     </section>
-    
-
     <script
       src="https://code.jquery.com/jquery-3.7.0.min.js"
       integrity="sha256-2Pmvv0kuTBOenSvLm6bvfBSSHrUJ+3A7x6P5Ebd07/g="
