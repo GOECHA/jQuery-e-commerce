@@ -372,13 +372,15 @@ $(document).off("click", ".decrease-itm-btn").on("click", ".decrease-itm-btn", f
     $(".delete-item").on("click", function (e) {
       e.preventDefault();
       var container = $("#container");
-      var goShoppingMsg = ` <div class="d-flex justify-content-center align-items-center empty-cart-container position-relative top-0 start-0 end-0 bottom-0">
+      var goShoppingMsg = ` <div class="d-flex flex-column justify-content-center align-items-center empty-cart-container position-relative top-0 start-0 end-0 bottom-0">
       <img
         src="./assets/seabubble.png"
         alt="seabubble Image"
-        class="img-fluid empty-cart-image"
-      /><h2 class="text-center pg-title-wrapper p-4 text-overlay position-absolute top-50 start-50 translate-middle text-center text-white mt-5">
-      As you set forth on your shopping adventure, your cart eagerly awaits its first treasure to be added.</h2></div>
+        class="img-fluid shadow empty-cart-image"
+      /><h2 class="text-center pg-title-wrapper p-4 text-overlay position-absolute text-white cart-empty-msg">
+      As you set forth on your shopping adventure, your cart eagerly awaits its first treasure to be added.</h2>
+      <a class="nav-link btn btn-grad position-absolute empty-cart-explore-btn" href="#products"> Explore </a>
+      </div>
       `;
 
       var index = $(this).data("index");
@@ -398,10 +400,11 @@ $(document).off("click", ".decrease-itm-btn").on("click", ".decrease-itm-btn", f
 
 
 $(function() {
-  $("#btnPurchase").click(function(e) {
+  $(document).on("click", "#btnPurchase", function(e) {
     e.preventDefault();
     purchaseItems();
   });
+
 
   function purchaseItems() {
     localStorage.removeItem("cartItems");
@@ -410,7 +413,7 @@ $(function() {
 
     $("#congratsModal").modal("show");
   }
-   $("#congratsModal .close").click(function() {
+  $(document).on("#congratsModal .close", function() {
     $("#congratsModal").modal("hide");
   });
 });
@@ -418,7 +421,7 @@ $(function() {
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~ Contact Form ~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 $(function () {
-  $("#contactForm").submit(function (event) {
+  $(document).on("#contactForm", function (event) {
     event.preventDefault();
 
     if (!$("#name").val() || !$("#email").val() || !$("#message").val()) {
