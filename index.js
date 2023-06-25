@@ -146,6 +146,18 @@ $("#btnRating").click(function () {
 
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~ Display Cart Items ~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
+function toggleSubmitButtonVisibility(cartItems) {
+  var submitButton = $("#btnPurchase");
+  var cartItmTable = $("#cartTable");
+  if (cartItems.length > 0) {
+    submitButton.show();
+    cartItmTable.show();
+  } else {
+    submitButton.hide();
+    cartItmTable.hide();
+  }
+}
+
 $(function () {
   $("#rowProduct").on("click", ".add-to-cart-btn", function (e) {
     e.preventDefault();
@@ -247,7 +259,7 @@ $(function () {
       
       $(document).on("click", ".dropdown-item", function () {
         const selectedProductId = $(this).data("product-id");
-        const selectedProductPrice = $(this).data("product-price");
+        // const selectedProductPrice = $(this).data("product-price");
       
       
         const selectedItemQty = parseFloat($(this).text()) || 0;
@@ -289,9 +301,22 @@ $(function () {
 
     cartItemsContainerTotalPrice.append(cartTotalPriceItemHtml);
 
+    toggleSubmitButtonVisibility(cartItems)
+    // if (cartItems.length > 0) {
+    //   $("#cartTable").show();
+    //   $("#btnPurchase").show();
+    // } else {
+    //   $("#cartTable").hide();
+    //   $("#btnPurchase").hide();
+    //   container.empty().append(goShoppingMsg);
+    // }
+  
+  
 
 
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~ Increase || Decrease Cart Items ~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+
 function increaseQuantity(productId) {
   var cartItems = JSON.parse(localStorage.getItem("cartItems")) || [];
   var cartItem = cartItems.find(function (item) {
