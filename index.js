@@ -413,7 +413,7 @@ $(function() {
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~ Contact Form ~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 $(function () {
-  $(document).on("#contactForm", function (event) {
+  $(document).on("submit", "#contactForm", function (event) {
     event.preventDefault();
 
     if (!$("#name").val() || !$("#email").val() || !$("#message").val()) {
@@ -422,6 +422,15 @@ $(function () {
       $("#name").val("");
       $("#email").val("");
       $("#message").val("");
+      submitContactMessage();
     }
+  });
+
+  function submitContactMessage() {
+    $("#submitModal").modal("show");
+  }
+
+  $(document).on("click", "#submitModal .close", function() {
+    $("#submitModal").modal("hide");
   });
 });
