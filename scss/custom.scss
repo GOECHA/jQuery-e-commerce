@@ -142,15 +142,12 @@ body,
   height: 12px;
   font-size: 25px;
 }
-.empty-cart-btn-wrapper{
-  height: 100%;
-  width: 100%;
+
+.empty-cart-explore-btn{
+  margin-top: -70%;
+  z-index: 1;
 }
 
-
-// .empty-cart-explore-btn{
- 
-// }
 
 .increase-itm-btn,
   .decrease-itm-btn {

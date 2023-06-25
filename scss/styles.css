@@ -13710,9 +13710,8 @@ body,
   font-size: 25px;
 }
 
-.empty-cart-btn-wrapper {
-  height: 100%;
-  width: 100%;
+.empty-cart-explore-btn {
+  position: top sticky !important;
 }
 
 .increase-itm-btn,
