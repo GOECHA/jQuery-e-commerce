@@ -142,21 +142,17 @@ body,
   height: 12px;
   font-size: 25px;
 }
-.empty-cart-btn-wrapper{
-  height: 100%;
-  width: 100%;
+
+.empty-cart-explore-btn {
+  margin-top: -60%;
+  z-index: 1;
 }
 
-
-// .empty-cart-explore-btn{
- 
-// }
-
 .increase-itm-btn,
-  .decrease-itm-btn {
-    background-color: transparent !important;
-    border: none;
-  }
+.decrease-itm-btn {
+  background-color: transparent !important;
+  border: none;
+}
 
 // ~~~~~~~~~~~~~~~~~~~~~~ Products ~~~~~~~~~~~~~~~~~~~~~~
 
@@ -174,6 +170,10 @@ p {
 .hero-sub-title,
 .cart-empty-msg {
   text-shadow: 3px 3px 5px rgba(0, 0, 0, 0.5);
+}
+
+.cart-empty-msg{
+  max-width: 70%;
 }
 
 .card-title-wrapper {
@@ -253,11 +253,13 @@ p {
     width: auto;
   }
 
-  .cart-empty-msg{
-   font-size: medium;
-
+  .cart-empty-msg {
+    font-size: medium;
   }
 
+  .empty-cart-explore-btn {
+    margin-top: -30%;
+  }
 
   .delete-item {
     font-size: 15px;
@@ -273,6 +275,4 @@ p {
     width: 40px;
     font-size: 10px;
   }
-
- 
 }
