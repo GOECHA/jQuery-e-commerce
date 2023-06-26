@@ -121,7 +121,7 @@ $("#searchByName").on("input", function () {
   });
 });
 
-$("click", "#btnSort", function () {
+$(document).on("click", "#btnSort", function () {
   var cards = $(".card");
 
   var titles = cards
@@ -144,7 +144,7 @@ $("click", "#btnSort", function () {
   });
 });
 
-$("click", "#btnRating", function () {
+$(document).on("click", "#btnRating", function () {
   var cards = $(".card");
 
   var ratings = cards
@@ -203,6 +203,7 @@ $(function () {
   $("#rowProduct").on("click", ".add-to-cart-btn", function (e) {
     e.preventDefault();
     clearSearchBar();
+    
     var productId = $(this).data("product-id");
     var productName = $(this).data("product-name");
     var productPrice = $(this).data("product-price");
