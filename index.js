@@ -92,7 +92,7 @@ function displayProducts(data) {
             <p class="font-weight-bold card-title">${product.title}</p>
           </div>
           <div class="card-description-wrapper">
-            <p class="card-text p-description">${product.description}</p>
+            <p class="card-text p-description text-center">${product.description}</p>
           </div>
           <p class="card-text price"> $${roundedNum} </p>
           <p class="card-text price" id="cardRating">⭑${product.rating.rate}</p>
