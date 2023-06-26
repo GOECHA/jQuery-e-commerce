@@ -45,15 +45,32 @@ function subtractItemPrice(totalPrice, qty, price) {
   return totalPrice - totalItemPrice(qty, price);
 }
 
-$(function() {
+// ~~~~~~~~~~~~~~~~~~~~~~~~~~~ Loaders ~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+
+$(function () {
   $(".lazy").Lazy({
-    scrollDirection: 'vertical',
-    effect: 'fadeIn',
+    scrollDirection: "vertical",
+    effect: "fadeIn",
     visibleOnly: true,
-    onError: function(element) {
-        console.log('error loading ' + element.data('src'));
-    }
+    onError: function (element) {
+      console.log("error loading " + element.data("src"));
+    },
+  });
 });
+
+$(function() {
+  $('body').append('<div style="" id="loadingDiv"><div class="loader text-white"><img class="loader" src="/assets/tealRay.png" alt="loading image" </div></div>');
+
+  $(window).on('load', function() {
+    setTimeout(removeLoader, 2000);
+  });
+
+  function removeLoader() {
+    $("#loadingDiv").fadeOut("slow", function() {
+      $(this).remove();
+    });
+  }
 });
 
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ Display Products ~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -233,7 +250,7 @@ $(function () {
         return listItems;
       }
 
-      const quantityList = qtyNums(itemQty)
+      const quantityList = qtyNums(itemQty);
       var cartItemHtml = `
         <tr>
           <th scope="row">${index + 1}</th>
