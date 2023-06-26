@@ -51,7 +51,6 @@ function clearSearchBar() {
 
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~ Loaders ~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-
 $(function () {
   $(".lazy").Lazy({
     scrollDirection: "vertical",
@@ -63,15 +62,17 @@ $(function () {
   });
 });
 
-$(function() {
-  $('body').append('<div style="" id="loadingDiv"><div class="loader text-white"><img class="loader" src="/assets/tealRay.png" alt="loading image" </div></div>');
+$(function () {
+  $("body").append(
+    '<div style="" id="loadingDiv"><div class="loader text-white"><img class="loader" src="/assets/tealRay.png" alt="loading image" </div></div>'
+  );
 
-  $(window).on('load', function() {
+  $(window).on("load", function () {
     setTimeout(removeLoader, 2000);
   });
 
   function removeLoader() {
-    $("#loadingDiv").fadeOut("slow", function() {
+    $("#loadingDiv").fadeOut("slow", function () {
       $(this).remove();
     });
   }
@@ -91,8 +92,10 @@ function displayProducts(data) {
           <div class="card-title-wrapper justify-content-center align-items-center">
             <p class="font-weight-bold card-title">${product.title}</p>
           </div>
-          <div class="card-description-wrapper text-center">
-            <p class="card-text p-description text-center">${product.description}</p>
+
+          <div class="mx-auto card-description-wrapper">
+            <p class="mx-auto card-text p-description">${product.description}</p>
+
           </div>
           <p class="card-text price"> $${roundedNum} </p>
           <p class="card-text price" id="cardRating">⭑${product.rating.rate}</p>
@@ -120,6 +123,7 @@ $("#searchByName").on("input", function () {
     }
   });
 });
+
 
 $(document).on("click", "#btnSort", function () {
   var cards = $(".card");
@@ -197,13 +201,11 @@ function toggleSubmitButtonVisibility(cartItems) {
   }
 }
 
-
-
 $(function () {
   $("#rowProduct").on("click", ".add-to-cart-btn", function (e) {
     e.preventDefault();
     clearSearchBar();
-    
+
     var productId = $(this).data("product-id");
     var productName = $(this).data("product-name");
     var productPrice = $(this).data("product-price");
