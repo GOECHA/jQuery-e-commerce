@@ -45,6 +45,10 @@ function subtractItemPrice(totalPrice, qty, price) {
   return totalPrice - totalItemPrice(qty, price);
 }
 
+function clearSearchBar() {
+  $("#searchByName").val("");
+}
+
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~ Loaders ~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 
@@ -117,7 +121,7 @@ $("#searchByName").on("input", function () {
   });
 });
 
-$("#btnSort").click(function () {
+$("click", "#btnSort", function () {
   var cards = $(".card");
 
   var titles = cards
@@ -140,7 +144,7 @@ $("#btnSort").click(function () {
   });
 });
 
-$("#btnRating").click(function () {
+$("click", "#btnRating", function () {
   var cards = $(".card");
 
   var ratings = cards
@@ -193,10 +197,12 @@ function toggleSubmitButtonVisibility(cartItems) {
   }
 }
 
+
+
 $(function () {
   $("#rowProduct").on("click", ".add-to-cart-btn", function (e) {
     e.preventDefault();
-
+    clearSearchBar();
     var productId = $(this).data("product-id");
     var productName = $(this).data("product-name");
     var productPrice = $(this).data("product-price");
